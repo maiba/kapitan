@@ -1,0 +1,50 @@
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function() {
+      $('form#account_edit').ajaxForm({dataType: 'script'});
+    });
+
+%h2 Редактирование профиля
+.account-page.white-pad
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f|
+    .field
+      %label= image_tag(resource.avatar.url, :class => 'avatar normal')
+      = f.file_field :avatar
+    .field
+      = f.label :email
+      = f.email_field :email
+    .field
+      = f.label :password
+      = f.password_field :password
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+      .tips (оставте поля пустыми если не хотите изменить текущий пароль)
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :company
+      = f.text_field :company
+    .field
+      = f.label :phone
+      = f.text_field :phone
+    .field
+      = f.label :site
+      = f.text_field :site
+    .field
+      = f.label :activity
+      = f.text_field :activity
+    .field
+      = f.label :current_password
+      = f.password_field :current_password
+      .tips (для сохранения настроек введите текущий пароль)
+    .field
+      = f.submit "Сохранить"
+      -# .f-right-50
+      -#   %h3 Cancel my account
+      -#   %p
+      -#     Unhappy?
+      -#     = link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete
+= render 'accounts/shared/menu'
+.clearfix

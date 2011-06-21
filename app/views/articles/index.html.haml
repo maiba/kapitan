@@ -1,0 +1,7 @@
+#articles
+  = render "/shared/content_page"
+%ul
+  - @articles.each do |article|
+    %li.white-pad
+      %h4= link_to article.title, article
+      = truncate_html article.content.html_safe, :length => 500

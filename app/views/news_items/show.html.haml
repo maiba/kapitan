@@ -1,0 +1,5 @@
+- content_for :title, @news_item.title
+#news
+  %h1= @news_item.title
+  .content.white-pad
+    =raw @news_item.content

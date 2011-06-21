@@ -1,0 +1,19 @@
+!!!
+%html
+  = render "/shared/head"
+  %body
+    = render "/shared/ie6check" if request.env['HTTP_USER_AGENT'] =~ /MSIE/
+    #wrap
+      #header= render "/shared/header"
+      #main
+        #top
+          #left_side= render "/shared/left_side"
+          #page
+            #crumbs= render_crumbs unless @skip_crumbs
+            = yield
+          .clearfix
+        - if @show_bottom_part
+          #bottom= render "/shared/bottom"
+        .clearfix
+    #footer= render "/shared/footer"
+    = render "/shared/javascripts"

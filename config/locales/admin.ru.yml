@@ -1,0 +1,118 @@
+ru:
+  shared:
+    admin:
+      image_picker:
+        image: Изображение
+
+  plugins:
+    accounts:
+      title: Аккаунты
+    ads:
+      title: Реклама
+    articles:
+      title: Статьи
+    services:
+      title: Услуги
+    offers:
+      title: Предложения
+    offer_groups:
+      title: Группы предложений
+    news_items:
+      title: Новости
+
+  admin:
+
+    accounts:
+      actions:
+        create_new: Добавить аккаунт
+        reorder: Сортировать
+        reorder_done: Закончить сортировку
+      records:
+        title: Аккаунты
+        sorry_no_results: Ничего не найдено
+        no_items_yet: Аккаунты не добавлены
+      account:
+        edit: Редактировать
+        delete: Удалить
+
+    ads:
+      actions:
+        create_new: Добавить рекламу
+        reorder: Сортировать
+        reorder_done: Закончить сортировку
+      records:
+        title: Реклама
+        sorry_no_results: Ничего не найдено
+        no_items_yet: Реклама не добавлена
+      ad:
+        view_live_html: Посмотреть новость в живую <br/><em>(откроется в новом окне)</em>
+        edit: Редактировать
+        delete: Удалить
+    
+    articles:
+      actions:
+        create_new: Добавить статью
+        reorder: Сортировать
+        reorder_done: Закончить сортировку
+      records:
+        title: Статьи
+        sorry_no_results: Ничего не найдено
+        no_items_yet: There are no Articles yet. Click "Add New Article" to add your first article.
+      article:
+        view_live_html: Посмотреть новость в живую <br/><em>(откроется в новом окне)</em>
+        edit: Редактировать
+        delete: Удалить
+
+    offers:
+      actions:
+        create_new: Добавить предложение
+        reorder: Сортировать
+        reorder_done: Закончить сортировку
+      records:
+        title: Предложения
+        sorry_no_results: Ничего не найдено
+        no_items_yet: There are no Proposals yet. Click "Add New Proposal" to add your first proposal.
+      offer:
+        view_live_html: Посмотреть новость в живую <br/><em>(откроется в новом окне)</em>
+        edit: Редактировать
+        delete: Удалить
+
+    services:
+      actions:
+        create_new: Добавить услугу
+        reorder: Сортировать
+        reorder_done: Закончить сортировку
+      records:
+        title: Услуги
+        sorry_no_results: Ничего не найдено
+        no_items_yet: There are no Services yet. Click "Add New Service" to add your first service.
+      service:
+        view_live_html: Посмотреть новость в живую <br/><em>(откроется в новом окне)</em>
+        edit: Редактировать
+        delete: Удалить
+
+    offer_groups:
+      actions:
+        create_new: Добавить группу предложений
+        reorder: Сортировать
+        reorder_done: Закончить сортировку
+      records:
+        title: Группы предложений
+        sorry_no_results: Ничего не найдено
+        no_items_yet: There are no Partners yet. Click "Add New Partner" to add your first partner.
+      offer_group:
+        view_live_html: Посмотреть новость в живую <br/><em>(откроется в новом окне)</em>
+        edit: Редактировать
+        delete: Удалить
+        
+    news_items:
+      actions:
+        create_new: Добавить новость
+      records:
+        title: Новости
+        sorry_no_results: Ничего не найдено
+        no_items_yet: Новости отсутствуют, нажмите 'Добавить новость'
+      news_item:
+        view_live_html: Посмотреть новость в живую <br/><em>(откроется в новом окне)</em>
+        edit: Редактировать
+        delete: Удалить

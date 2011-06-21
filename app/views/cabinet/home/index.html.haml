@@ -1,0 +1,11 @@
+%h1 Личный кабинет
+#cabinet_root.account-page.white-pad
+  %h3 Добропожаловать #{@account.title}
+  = image_tag(@account.avatar.url, :class => 'avatar normal')
+  - [:email, :name, :company, :phone, :site, :activity].each do |attr|
+    - if @account.send(attr) && @account.send(attr).any?
+      .attribute
+        %span.attribute_name #{@account.class.human_attribute_name(attr)}:
+        %span.attribute_value= @account.send attr
+= render 'accounts/shared/menu'
+.clearfix

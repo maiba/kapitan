@@ -1,0 +1,16 @@
+- content_for :title, @service.title
+- content_for :body_content_title, @service.title
+
+
+= render "/shared/content_page"
+
+#service
+  .content.white-pad
+    = image_fu @service.photo, '320x140#', :class => 'service-image'
+    = raw @service.content
+    %br
+    = link_to 'Скачать прайс', @service.price.url if @service.price
+    .clearfix
+  
+  - if @service.offer_groups
+    = render 'offer_groups/offer_groups', :offer_groups => @service.offer_groups

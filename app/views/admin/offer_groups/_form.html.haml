@@ -1,0 +1,56 @@
+= form_for [:admin, @offer_group] do |f|
+  = render "/shared/admin/error_messages", :object => @offer_group, :include_object_name => true
+
+  .field
+    = f.label :title
+    = f.text_field :title, :class => 'larger widest'
+  
+  .field
+    = f.label :photo
+    = render "/shared/admin/image_picker", :f => f, :field => :photo_id, :image => @offer_group.photo, :toggle_image_display => false
+
+  .field
+    = f.label :services
+    - Service.all.each do |service|
+      %div
+        = check_box_tag "offer_group[service_ids][]", service.id, @offer_group.services.include?(service), :id => "offer_group_service_id_#{service.id}"
+        = label_tag "offer_group_service_id_#{service.id}", service.title, :class => "stripped"
+  .field
+    = f.label :offer_prices
+    = f.fields_for :offer_prices, @offer_group.all_offer_prices do |op_f|
+      -# = op_f.object.inspect
+      -# %br
+      %div
+        %div
+          = op_f.object.offer.title
+          за
+          = op_f.object.offer.suffix
+        = op_f.hidden_field :offer_id
+        = op_f.hidden_field :offer_group_id
+        = op_f.text_field :price
+        грн. +
+        = op_f.text_field :percentage
+        процентов
+        - unless op_f.object.new_record?
+          = op_f.check_box :_destroy
+          Удалить?
+      %br
+  .field
+    #page-tabs.clearfix.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
+      %ul#page_parts
+        - [:content].each_with_index do |part, part_index|
+          %li{ :class => "ui-state-default#{' ui-state-active' if part_index == 0}" }
+            = link_to part.to_s.titleize, "##{part}"
+
+      #page_part_editors
+        - [:content].each do |part|
+          .page_part{ :id => part }
+            = f.text_area part, :rows => 20, :class => 'wymeditor widest'
+
+  = render "/shared/admin/form_actions", :f => f, :continue_editing => false, :delete_title => t('delete', :scope => 'admin.offer_groups.offer_group'), :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @offer_group.title)
+
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });

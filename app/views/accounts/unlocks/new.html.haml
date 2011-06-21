@@ -1,0 +1,12 @@
+%h1 Повторно отправить инструкции по смене пароля
+.account-page.white-pad
+  = form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f|
+    = devise_error_messages!
+    .field
+      = f.label :email
+      = f.email_field :email
+    .field
+      = f.submit "Выслать"
+  = render "accounts/shared/links"
+= render "accounts/shared/menu"
+.clearfix

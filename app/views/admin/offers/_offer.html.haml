@@ -1,0 +1,7 @@
+%li{ :class => "clearfix record #{cycle("on", "on-hover")}", :id => dom_id(offer) }
+  %span.title
+    = offer.title
+    %span.preview &nbsp;
+  %span.actions
+    = link_to refinery_icon_tag("application_edit.png"), edit_admin_offer_path(offer), :title => t('.edit')
+    = link_to refinery_icon_tag("delete.png"), admin_offer_path(offer), :class => "cancel confirm-delete", :title => t('.delete'), :confirm => t('message', :scope => 'shared.admin.delete', :title => offer.title), :method => :delete

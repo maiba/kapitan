@@ -1,0 +1,7 @@
+%ul.services
+  - services.each do |service|
+    %li.white-pad
+      = link_to image_fu(service.photo, '210x90>'), service, :class => 'service-photo'
+      %h4= link_to service.title, service
+      .content= truncate_html service.content.html_safe, :length => 600
+  .clearfix

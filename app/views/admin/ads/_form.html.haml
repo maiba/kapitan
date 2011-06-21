@@ -1,0 +1,47 @@
+= form_for [:admin, @ad] do |f|
+  = render "/shared/admin/error_messages", :object => @ad, :include_object_name => true
+
+  .field
+    = f.label :title
+    = f.text_field :title, :class => 'larger widest'
+
+  .field
+    = f.label :link
+    = f.text_field :link, :class => 'larger widest'
+
+  .field
+    = f.label :date
+    = f.datetime_select :date
+  
+  .field
+    = f.label :photo
+    = render "/shared/admin/image_picker", :f => f, :field => :photo_id, :image => @ad.photo, :toggle_image_display => false
+  
+  .field
+    %span
+      = label_tag :side
+      = f.radio_button :side, ''
+      = label_tag "ad_side_", 'Не важно', :class => "stripped"
+      - Ad::SIDES.each do |type|
+        = f.radio_button :side, type
+        = label_tag "ad_side_#{type}", type.to_s.titleize, :class => "stripped"
+  
+  .field
+    #page-tabs.clearfix.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
+      %ul#page_parts
+        - [:content].each_with_index do |part, part_index|
+          %li{ :class => "ui-state-default #{'ui-state-active' if part_index == 0}" }
+            = link_to part.to_s.titleize, "##{part}"
+
+      #page_part_editors
+        - [:content].each do |part|
+          .page_part{ :id => part }
+            = f.text_area part, :rows => 20, :class => 'wymeditor widest'
+  
+  = render "/shared/admin/form_actions", :f => f, :continue_editing => false, :delete_title => t('delete', :scope => 'admin.ads.ad'), :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @ad.title)
+
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });

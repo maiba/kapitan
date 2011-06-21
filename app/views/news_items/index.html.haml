@@ -1,0 +1,7 @@
+= render :partial => "/shared/content_page"
+
+%ul.news_items
+  - @news_items.each do |news|
+    %li.white-pad
+      %h4= link_to news.title, news
+      = truncate_html news.content.html_safe, :lenght => 600

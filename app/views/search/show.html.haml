@@ -1,0 +1,12 @@
+#search_results
+  - if @results.any?
+    %ul
+      %h2 Всего найдено: #{@results.count}
+      - @results.each do |result|
+        - content = (result.class == Page ? result.parts.map(&:body).join('') : result.content)
+        %li{ :class => cycle('even', 'odd') }
+          %span.result_type= result.class.name
+          %h3= link_to raw(result.title.gsub(/(#{params[:query]})/i, '<mark>\1</mark>')), result_url(result)
+          .content= truncate_html(raw(content), :length => 600).gsub(/(#{params[:query]})/i, '<mark>\1</mark>')
+  - else
+    %h1 По вашему запросу ничего не найдено

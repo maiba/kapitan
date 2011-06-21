@@ -1,0 +1,13 @@
+#home
+  %ul.services-index
+    - Service.limit(6).all.each do |service|
+      %li
+        .top
+          %h3= link_to service.title, service
+          = link_to image_fu(service.photo, '200x90#'), service
+        .content= truncate_html service.content.html_safe
+    .clearfix
+
+        
+        
+    

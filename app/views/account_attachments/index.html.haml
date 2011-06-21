@@ -1,0 +1,28 @@
+= render 'shared/content_page'
+#file_upload.account-page.white-pad
+  - if account_signed_in?
+    - if current_account.attachments.any?
+      %fieldset
+        %legend Загруженные Файлы
+        %ul.account_attachments
+          - current_account.attachments.each do |attachment|
+            %li
+              = link_to "Скачать", attachment
+              = link_to "Удалить", attachment, :confirm => "Вы точно хотите удалить этот файл?", :method => :delete
+              = attachment.resource_file_name
+    %fieldset
+      %legend Форма загрузки
+      = form_for Account::Attachment.new, :html => { :multipart => true } do |f|
+        .field
+          = f.label :resourse
+          = f.file_field :resource
+        .field
+          = f.submit "Загрузить"
+  - else
+    %p
+      Если вы хотите воспользоваться прямой загрузкой файлов на сайт
+      = link_to "Войдите", new_account_session_path
+      или
+      = link_to "Зарегистрируйтесь", new_account_registration_path
+= render 'accounts/shared/menu'
+.clearfix

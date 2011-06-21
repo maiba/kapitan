@@ -1,0 +1,3 @@
+%ul
+  %li= render("/shared/admin/search", :url => admin_accounts_url) if Admin::AccountsController.searchable?
+  %li= link_to t('.create_new'), new_admin_account_url, :class => "add_icon"

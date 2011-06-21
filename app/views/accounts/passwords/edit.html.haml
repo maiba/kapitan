@@ -1,0 +1,15 @@
+%h2 Смена пароля
+.white-pad
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+    = f.hidden_field :reset_password_token
+    = devise_error_messages!
+    .field
+      = f.label :password, "Новый пароль"
+      = f.password_field :password
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+    .field
+      = f.submit "Change my password"
+
+    = render "accounts/shared/links"

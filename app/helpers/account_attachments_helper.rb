@@ -1,0 +1,2 @@
+module AccountAttachmentsHelper
+end

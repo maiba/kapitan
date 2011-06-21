@@ -1,0 +1,66 @@
+.content
+  .service
+    %h3= link_to "Полный список предлагаемых услуг", services_path
+    %ul
+      %li
+        %h5 Разработка
+        %ul
+          %li нейминг, разработка названия
+          %li позиционирование
+          %li создание бренда
+          %li разработка логотипа
+          %li разработка фирменного стиля
+          %li разработка торговой марки
+      %li
+        %h5 Продвижение
+        %ul
+          %li бренд-консалтинг
+          %li креатив, идеи продвижения
+          %li стратегия продвижения
+          %li комплексное продвижение бренда
+          %li выведение товаров/услуг на рынок
+          %li формирование каналов коммуникаций
+      %li
+        %h5 Размещение
+        %ul
+          %li реклама в прессе
+          %li реклама на ТВ
+          %li реклама на радио
+          %li реклама в метро
+          %li наружная реклама
+      %li
+        %h5 Продукция
+        %ul
+          %li оформление торговых точек
+          %li подготовка к выставкам
+          %li ежедневники, ручки с логотипом
+          %li сувенирная продукция с логотипом
+          %li корпоративные и деловые подарки
+  .map
+    %h3= link_to "Мы на карте", "#"
+    = link_to image_tag('map.png'), 'http://maps.google.com.ua/maps?f=q&source=s_q&hl=ru&geocode=&q=%D0%B3.%D0%A5%D0%B0%D1%80%D1%8C%D0%BA%D0%BE%D0%B2+%D0%BF%D0%BB.%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B,+8&sll=48.382803,31.17461&sspn=17.766957,46.538086&ie=UTF8&hq=&hnear=%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B+%D0%BF%D0%BB.,+8,+%D0%A5%D0%B0%D1%80%D1%8C%D0%BA%D0%BE%D0%B2,+%D0%A5%D0%B0%D1%80%D1%8C%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C&view=map&z=16', :target => '_blank'
+    %br
+    %br
+    %br
+    %br
+    %br
+    %br
+
+    = link_to 'Project studio - GAGARIN', 'http://gagarin.in.ua', :target => '_blank'
+    
+  .contacts
+    %h5 Наши контакты
+    .content=raw RefinerySetting.find_or_set(:footer_contacts, "Footer contacts")
+    %br
+    %br
+    .copyright Copyright © Капитан, 2011
+    %br
+    %br
+    .social
+      %h5 Социальные сети
+      .icons
+        = link_to image_tag('vkontakte.png'), RefinerySetting.find_or_set(:vkontake_link, 'http://vkontakte.ru'), :target => '_blank'
+        = link_to image_tag('facebook.png'), RefinerySetting.find_or_set(:facebook_link, 'http://facebook.com'), :target => '_blank'
+        = link_to image_tag('twitter.png'), RefinerySetting.find_or_set(:twitter_link, 'http://twitter.com'), :target => '_blank'
+  .clearfix
+    

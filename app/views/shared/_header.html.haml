@@ -1,0 +1,14 @@
+#account-bar
+  - if account_signed_in?
+    = link_to "Кабинет", cabinet_root_path
+    |
+    = link_to "Выход", destroy_account_session_path, :class => 'grey'
+  - else
+    = link_to "Вход", new_account_session_path
+    |
+    = link_to "Регистрация", new_account_registration_path, :class => 'grey'
+%h1#logo= link_to image_tag('logo.png'), root_path
+.phones= raw RefinerySetting.find_or_set(:header_phones, 'Header phones')
+.text= raw RefinerySetting.find_or_set(:header_text, 'Header text')
+= render "/shared/menu", :dom_id => 'menu', :css => 'menu'
+.clearfix

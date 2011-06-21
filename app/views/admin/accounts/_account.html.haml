@@ -1,0 +1,10 @@
+%li{ :class => "clearfix record #{cycle('on', 'on-hover')}", :id => dom_id(account) }
+  %span.title
+    = account.email
+    = account.name if account.name
+    (#{l account.created_at.to_date})
+    %span.preview &nbsp;
+
+  %span.actions
+    = link_to refinery_icon_tag("application_edit.png"), edit_admin_account_path(account), :title => t('.edit')
+    = link_to refinery_icon_tag("delete.png"), admin_account_path(account), :class => "cancel confirm-delete", :title => t('.delete'), :confirm => t('message', :scope => 'shared.admin.delete', :title => account.title), :method => :delete

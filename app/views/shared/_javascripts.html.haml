@@ -1,0 +1,26 @@
+= yield :before_javascript_libraries
+= javascript_include_tag :defaults
+= yield :javascript_libraries
+= yield :after_javascript_libraries
+- if request.env['HTTP_USER_AGENT'] =~ /MSIE/
+  :erb
+    <!--[if lt IE 7 ]>
+      <%= javascript_include_tag 'dd_belatedpng' %>
+      <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+    <![endif]-->
+= yield :javascripts
+
+:ruby
+  if flash.any?
+    flash.each do |name, msg|
+      flash.discard(:error) if name == :error
+    end
+  end
+
+- if flash.any?
+  :javascript
+    $(document).ready(function(){
+      $.each(#{flash.to_json}, function(key,value) {
+        $.growl[key](value);
+      });
+    });

@@ -1,0 +1,31 @@
+= form_for [:admin, @account] do |f|
+  = render "/shared/admin/error_messages", :object => @account, :include_object_name => true
+
+  .hemisquare
+    - [:email, :name, :company, :phone, :activity, :site].each do |attr|
+      .field
+        = f.label attr
+        = f.text_field attr, :class => 'larger'
+  .hemisquare.right_side
+    = image_tag(@account.avatar.url)
+    - if @account.attachments.any?
+      %fieldset
+        %legend Загруженные Файлы
+        - f.fields_for :attachments do |a_f|
+          %div
+            %div{ :style => "float:right;"}
+              = link_to "Скачать", a_f.object
+              = a_f.label :_destroy, "Удалить?", :class => "stripped"
+              = a_f.check_box :_destroy
+              = a_f.hidden_field :id
+            = a_f.object.resource_file_name
+            .clearfix
+  .clearfix
+
+  = render "/shared/admin/form_actions", :f => f, :continue_editing => false, :delete_title => t('delete', :scope => 'admin.accounts.account'), :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @account.title)
+
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });

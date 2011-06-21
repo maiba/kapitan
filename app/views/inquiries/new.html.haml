@@ -1,0 +1,55 @@
+#contact_page
+  = render "/shared/content_page"
+  .left
+    = form_for @inquiry do |f|
+      .label Обратная связь
+      %br
+      .line
+        = f.required_label :name
+        = f.text_field :name, :value => (account_signed_in? && current_account.name.any?) ? current_account.name : nil
+      .line
+        = f.required_label :email
+        = f.text_field :email, :value => (account_signed_in?) ? current_account.email : nil
+      .line
+        = f.label :phone
+        = f.text_field :phone, :value => (account_signed_in? && current_account.phone.any?) ? current_account.phone : nil
+      .line
+        = f.required_label :message
+        = f.text_area :message, :rows => 8
+      = f.submit 'Отправить'
+  .right
+    .label Физический адрес:
+    .grey= RefinerySetting.find_or_set(:physical_address, "Физический адрес")
+    %br
+    .label Телефоны:
+    .grey= RefinerySetting.find_or_set(:phones, "Телефоны")
+    %br
+    .label Тел./Факс:
+    .grey= RefinerySetting.find_or_set(:fax, "Факс")
+    %br
+    .label e-mail:
+    .grey= RefinerySetting.find_or_set(:email, "kapitan_ko@mail.ru")
+    %ul.icq-contacts
+      %li
+        %h5 Менеджер по наружной рекламе
+        .icon= RefinerySetting.find_or_set(:icq_external_ad, '123123123')
+      %li
+        %h5 Менеджер по прессе
+        .icon= RefinerySetting.find_or_set(:icq_press, '123123123')
+      %li
+        %h5 Дизайнер
+        .icon= RefinerySetting.find_or_set(:icq_design, '123123123')
+      =raw RefinerySetting.find_or_set(:siteheart_code, '<a id="online-chat" href="https://siteheart.com/webconsultation/150496?byhref=1" target="siteheart_sitewindow_150496" onclick="o=window.open;o(\'https://siteheart.com/webconsultation/150496\', \'siteheart_sitewindow_150496\', \'width=550,height=400,top=30,left=30,resizable=yes\'); return false;"><img src="http://webindicator.siteheart.com/webindicator/image/1306226043?ent=150496&company=150496"  border="0" alt="SiteHeart" /></a>')
+  .clearfix
+
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function() {
+      $('form#new_inquiry').ajaxForm().slidinglabels({
+        className: 'line',
+        topPosition: '10px',
+        leftPosition: '5px',
+        axis: 'y',
+        speed: 'fast'
+      });
+    });

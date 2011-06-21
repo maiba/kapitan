@@ -1,0 +1,42 @@
+ru:
+  activerecord:
+
+    models:
+
+      account: Аккаунт
+      inquiry: Запрос
+      account_attachment: Файлы пользователя
+
+    attributes:
+
+      account:
+        name: Имя
+        email: Эл. почта
+        avatar: Аватар
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        current_password: Текущий пароль
+        site: Сайт
+        activity: Вид деятельности
+        phone: Телефон
+        company: Компания
+        remember_me: Запомнить меня
+
+        attachment:
+          resourse: Файл
+          
+      news_item:
+        title: Заголовок
+        date: Дата
+        content: Контент
+
+      inquiry:
+        name: Имя
+        email: Эл. почта
+        phone: Телефон
+        message: Сообщение
+
+      partner:
+        title: Заголовок
+        photo: Фото
+        content: Контент

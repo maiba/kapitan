@@ -1,0 +1,26 @@
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function() {
+      $("form#account_new").ajaxForm({dataType:'script'});
+    });
+
+%h1 Регистрация
+.account-page.white-pad
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    .field
+      = f.label :email
+      = f.email_field :email
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :password
+      = f.password_field :password
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+    .field
+      = f.submit "Зарегистрироваться"
+  = render "accounts/shared/links"
+= render "accounts/shared/menu"
+.clearfix

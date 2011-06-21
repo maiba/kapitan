@@ -1,0 +1,8 @@
+%ul
+  - if Admin::OfferGroupsController.searchable?
+    %li= render "/shared/admin/search", :url => admin_offer_groups_url
+  %li= link_to t('.create_new'), new_admin_offer_group_url, :class => "add_icon"
+  - if !searching? and Admin::OfferGroupsController.sortable? and Offer::Group.count > 1
+    %li
+      = link_to t('.reorder', :what => "OfferGroups"), admin_offer_groups_url, :id => "reorder_action", :class => "reorder_icon"
+      = link_to t('.reorder_done', :what => "OfferGroups"), admin_offer_groups_url, :id => "reorder_action_done", :style => "display: none;", :class => "reorder_icon"

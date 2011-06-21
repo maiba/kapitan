@@ -1,0 +1,3 @@
+%section#records= render 'records'
+%aside#actions= render 'actions'
+= render('/shared/admin/make_sortable', :tree => false) if !searching? and Admin::OfferGroupsController.sortable? and Offer::Group.count > 1

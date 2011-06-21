@@ -1,0 +1,13 @@
+.content
+  .left
+    = render "ads/ad", :side => :left
+  .right
+    = render "ads/ad", :side => :right
+  .center
+    %h1= link_to 'Новости', news_items_path
+    %ul.news
+      - NewsItem.limit(4).all.each do |news|
+        %li
+          %h5= link_to news.title, news
+          .content= truncate_html(news.content.html_safe, :length => 400)
+    .clearfix
