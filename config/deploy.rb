@@ -27,7 +27,7 @@ after "deploy:update_code", :install_gems
 task :copy_database_config, roles => :app do
   db_config = "#{shared_path}/database.yml"
   db = "#{shared_path}/kapitan.sqlite3"
-  run "ln -s #{db_config} #{release_path}/config/database.yml && ln -s #{db} #{release_path}/db/kapitan.sqlite3"
+  run "cp #{db_config} #{release_path}/config/database.yml && ln -s #{db} #{release_path}/db/kapitan.sqlite3"
 end
 
 task :install_gems, roles => :app do
