@@ -10,7 +10,6 @@
           #left_side= render "/shared/left_side"
           #page
             #crumbs= render_crumbs unless @skip_crumbs
-            = params.inspect
             = yield
           .clearfix
         - if @show_bottom_part
