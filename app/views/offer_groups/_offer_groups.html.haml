@@ -1,7 +1,7 @@
 %ul.offer_groups
   - offer_groups.each do |offer_group|
     %li.white-pad
-      = link_to image_fu(offer_group.photo, '210x90>', :style => 'float:right;mirgin-left:5px;'), [@service, offer_group], :class => 'offer_group-photo'
+      = link_to image_fu(offer_group.photo, '210x90>'), [@service, offer_group], :class => 'offer_group-photo', :style => 'float:right;margin-left:15px;'
       %h4= link_to offer_group.title, [@service, offer_group]
       .content= truncate_html offer_group.content.html_safe, :length => 600
       .clearfix
