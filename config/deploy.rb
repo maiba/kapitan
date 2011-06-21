@@ -4,6 +4,8 @@
 # set :repository - Установить расположение вашего репозитория
 # У вас должна быть настроена авторизация ssh по сертификатам
 
+require 'bundler/capistrano'
+
 set :application, "kapitan"
 set :repository,  "git://github.com/graycoder/kapitan.git"
 
@@ -20,16 +22,17 @@ role :app, "lithium.locum.ru"                          # This may be the same as
 role :db,  "lithium.locum.ru", :primary => true # This is where Rails migrations will run
 
 after "deploy:update_code", :copy_database_config
-after "deploy:update_code", :install_gems
+# after "deploy:update_code", :install_gems
 
 task :copy_database_config, roles => :app do
   db_config = "#{shared_path}/database.yml"
-  run "cp #{db_config} #{release_path}/config/database.yml"
+  db = "#{shared_path}/kapitan.sqlite3"
+  run "ln -s #{db_config} #{release_path}/config/database.yml && ln -s #{db} #{release_path}/db/kapitan.sqlite3"
 end
 
-task :install_gems, roles => :app do
-  run "cd #{release_path} && /var/lib/gems/1.8/bin/bundle install --path=~/.gems"
-end
+# task :install_gems, roles => :app do
+#   run "cd #{release_path} && /var/lib/gems/1.8/bin/bundle install --path=~/.gems"
+# end
 
 set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
 set :unicorn_conf, "/etc/unicorn/kapitan.tolik925.rb"
