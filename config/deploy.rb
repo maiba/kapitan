@@ -7,7 +7,7 @@
 # require 'bundler/capistrano'
 
 set :application, "kapitan"
-set :repository,  "git://github.com/graycoder/kapitan.git"
+set :repository,  "git://github.com/gagarin-in-ua/kapitan.git"
 
 dpath = "/home/hosting_tolik925/projects/kapitan"
 

@@ -528,6 +528,7 @@ body {
 	color: #333333;
 	background: url(/images/bg-body.jpg) repeat;
 	font: 12px/1.3 Verdana, sans-serif;
+	top: 0;
 }
 
 #wrap {
@@ -538,6 +539,7 @@ body {
 
 #main {
 	padding-bottom: 400px;
+	background-color: transparent;
 }
 
 #page {
@@ -1014,8 +1016,8 @@ legend {
 	width: 1000px;
 	height: 188px;
 	margin-right: auto;
-	margin-top: 10px;
 	margin-left: auto;
+	padding-top: 10px;
 }
 
 /* @group account bar */
