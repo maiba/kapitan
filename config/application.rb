@@ -54,6 +54,12 @@ module Kapitan
       :authentication       => 'plain',
       :enable_starttls_auto => true
     }
+    
+    config.gem 'rack-rewrite', '~> 1.0.0'
+    require 'rack/rewrite'
+    config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do
+      r301 %r{(.+)/$}, '$1'
+    end
 
   end
 end

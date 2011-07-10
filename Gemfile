@@ -10,6 +10,7 @@ gem "crummy", ">= 1.0.1"
 gem 'paperclip'
 gem 'meta_search'
 gem 'meta_where'
+gem 'rack-rewrite', '~> 1.0.0'
 group :development, :test do
   gem 'hirb'
   gem 'thin'
