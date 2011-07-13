@@ -1602,3 +1602,9 @@ img.avatar.normal {
 
 
 /* @end */
+
+/* @group courier */
+
+table.border, table.border td {border: 1px solid black;}
+
+/* @end */
