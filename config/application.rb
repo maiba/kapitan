@@ -44,16 +44,6 @@ module Kapitan
     end
 
     config.action_mailer.default_url_options = { :host => 'kapitan.kh.ua' }
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => 'kapitan.kh.ua',
-      :user_name            => 'noreply@kapitan.kh.ua',
-      :password             => 'kapitan.kh.ua',
-      :authentication       => 'plain',
-      :enable_starttls_auto => true
-    }
     
     config.gem 'rack-rewrite', '~> 1.0.0'
     require 'rack/rewrite'

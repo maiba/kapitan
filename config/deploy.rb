@@ -1,16 +1,17 @@
 set :application, "kapitan"
 set :repository,  "git://github.com/gagarin-in-ua/kapitan.git"
-set :use_sudo, false
+set :account, "tolik925"
 set :user, "hosting_tolik925"
-set :deploy_to, "/home/hosting_tolik925/projects/kapitan"
-set :scm, :git
-set :bundle, "/var/lib/gems/1.8/bin/bundle"
-set :rake, "#{bundle} exec rake"
 set :db_file, "kapitan.sqlite3"
 
+set :scm, :git
+set :use_sudo, false
+set :deploy_to, "/home/#{user}/projects/#{application}"
+set :bundle, "/var/lib/gems/1.8/bin/bundle"
+set :rake, "#{bundle} exec rake"
 set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
-set :unicorn_conf, "/etc/unicorn/#{application}.tolik925.rb"
-set :unicorn_pid, "/var/run/unicorn/#{application}.tolik925.pid"
+set :unicorn_conf, "/etc/unicorn/#{application}.#{account}.rb"
+set :unicorn_pid, "/var/run/unicorn/#{application}.#{account}.pid"
 
 role :web, "lithium.locum.ru"
 role :app, "lithium.locum.ru"
@@ -44,9 +45,9 @@ namespace :deploy do
 
   desc "Make symlinks for application config files"
   task :copy_configs, roles => :app do
-    run "ln -s #{shared_path}/mail.rb #{release_path}/config/initializers/mail.rb"
-    run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
-    run "ln -s #{shared_path}/#{db_file} #{release_path}/db/#{db_file}"
+    run "ln -s #{shared_path}/initializers/mail.rb #{release_path}/config/initializers/mail.rb"
+    run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -s #{shared_path}/db/#{db_file} #{release_path}/db/#{db_file}"
   end
 
   desc "Install bundler gems"
@@ -58,4 +59,4 @@ end
 
 after 'deploy:update_code', 'dragonfly:symlink'
 after "deploy:update_code", 'deploy:copy_configs'
-after "deploy:update_code", 'deploy:install_gems'
+after "deploy:update_code", 'deploy:bundle_install'
