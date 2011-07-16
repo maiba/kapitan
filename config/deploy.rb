@@ -57,6 +57,16 @@ namespace :deploy do
 
 end
 
-after 'deploy:update_code', 'dragonfly:symlink'
-after "deploy:update_code", 'deploy:copy_configs'
-after "deploy:update_code", 'deploy:bundle_install'
+namespace :db do
+
+  desc "Migrate database"
+  task :migrate, roles => :app do
+    run "cd #{release_path} && #{rake} db:migrate"
+  end
+
+end
+
+after "deploy:update_code", "dragonfly:symlink"
+after "deploy:update_code", "deploy:copy_configs"
+after "deploy:copy_configs", "deploy:bundle_install"
+after "deploy:bundle_install", "db:migrate"
