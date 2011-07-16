@@ -45,7 +45,7 @@ namespace :deploy do
 
   desc "Make symlinks for application config files"
   task :copy_configs, roles => :app do
-    run "ln -s #{shared_path}/initializers/mail.rb #{release_path}/config/initializers/mail.rb"
+    run "ln -s #{shared_path}/config/initializers/mail.rb #{release_path}/config/initializers/mail.rb"
     run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -s #{shared_path}/db/#{db_file} #{release_path}/db/#{db_file}"
   end
