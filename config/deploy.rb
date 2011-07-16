@@ -1,48 +1,35 @@
-# _your_login_ - Поменять на ваш логин в панели управления
-# _your_project_ - Поменять на имя вашего проекта
-# _your_server_ - Поменять на имя вашего сервера (Указано на вкладке "FTP и SSH" вашей панели управления)
-# set :repository - Установить расположение вашего репозитория
-# У вас должна быть настроена авторизация ssh по сертификатам
-
-# require 'bundler/capistrano'
-
 set :application, "kapitan"
 set :repository,  "git://github.com/gagarin-in-ua/kapitan.git"
-
-dpath = "/home/hosting_tolik925/projects/kapitan"
-
-set :user, "hosting_tolik925"
 set :use_sudo, false
-set :deploy_to, dpath
-
+set :user, "hosting_tolik925"
+set :deploy_to, "/home/hosting_tolik925/projects/kapitan"
 set :scm, :git
-
-role :web, "lithium.locum.ru"                          # Your HTTP server, Apache/etc
-role :app, "lithium.locum.ru"                          # This may be the same as your `Web` server
-role :db,  "lithium.locum.ru", :primary => true # This is where Rails migrations will run
-
-after "deploy:update_code", :copy_database_config
-after "deploy:update_code", :install_gems
-
-task :copy_database_config, roles => :app do
-  db_config = "#{shared_path}/database.yml"
-  db = "#{shared_path}/kapitan.sqlite3"
-  run "cp #{db_config} #{release_path}/config/database.yml && ln -s #{db} #{release_path}/db/kapitan.sqlite3"
-end
-
-task :install_gems, roles => :app do
-  run "cd #{release_path} && /var/lib/gems/1.8/bin/bundle install --path=~/.gems"
-end
+set :bundle, "/var/lib/gems/1.8/bin/bundle"
+set :rake, "#{bundle} exec rake"
+set :db_file, "kapitan.sqlite3"
 
 set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
-set :unicorn_conf, "/etc/unicorn/kapitan.tolik925.rb"
-set :unicorn_pid, "/var/run/unicorn/kapitan.tolik925.pid"
+set :unicorn_conf, "/etc/unicorn/#{application}.tolik925.rb"
+set :unicorn_pid, "/var/run/unicorn/#{application}.tolik925.pid"
 
-# - for unicorn - #
+role :web, "lithium.locum.ru"
+role :app, "lithium.locum.ru"
+role :db,  "lithium.locum.ru", :primary => true
+
+namespace :dragonfly do
+
+  desc "Symlink the Rack::Cache files"
+  task :symlink, :roles => :app do
+    run "mkdir -p #{shared_path}/tmp/dragonfly && ln -nfs #{shared_path}/tmp/dragonfly #{release_path}/tmp/dragonfly"
+  end
+
+end
+
 namespace :deploy do
+
   desc "Start application"
   task :start, :roles => :app do
-    run "#{unicorn_rails} -Dc #{unicorn_conf}"
+    run "cd #{deploy_to}/current && #{bundle} exec unicorn_rails -Dc #{unicorn_conf}"
   end
 
   desc "Stop application"
@@ -54,4 +41,21 @@ namespace :deploy do
   task :restart, :roles => :app do
     run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}"
   end
+
+  desc "Make symlinks for application config files"
+  task :copy_configs, roles => :app do
+    run "ln -s #{shared_path}/mail.rb #{release_path}/config/initializers/mail.rb"
+    run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
+    run "ln -s #{shared_path}/#{db_file} #{release_path}/db/#{db_file}"
+  end
+
+  desc "Install bundler gems"
+  task :bundle_install, roles => :app do
+    run "cd #{release_path} && #{bundle} install --path=~/.gems"
+  end
+
 end
+
+after 'deploy:update_code', 'dragonfly:symlink'
+after "deploy:update_code", 'deploy:copy_configs'
+after "deploy:update_code", 'deploy:install_gems'
