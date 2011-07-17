@@ -41,17 +41,9 @@ namespace :deploy do
     run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}"
   end
 
-  desc "Run the migrate rake task."
+  desc "Run the migrate rake task"
   task :migrate, :roles => :db, :only => { :primary => true } do
-    migrate_env = fetch(:migrate_env, "")
-    migrate_target = fetch(:migrate_target, :latest)
-
-    directory = case migrate_target.to_sym
-      when :current then current_path
-      when :latest  then latest_release
-      else raise ArgumentError, "unknown migration target #{migrate_target.inspect}"
-      end
-    run "cd #{directory}; #{rake} RAILS_ENV=#{rails_env} #{migrate_env} db:migrate"
+    run "cd #{current_release}; #{rake} RAILS_ENV=#{rails_env} db:migrate"
   end
 
   desc "Make symlinks for application config files"
@@ -77,3 +69,4 @@ end
 after "deploy:update_code", "dragonfly:symlink"
 after "deploy:update_code", "deploy:copy_configs"
 after "deploy:copy_configs", "bundler:install"
+after "bundler:install", "deploy:migrate"

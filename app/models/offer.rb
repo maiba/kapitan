@@ -15,6 +15,5 @@ class Offer < ActiveRecord::Base
                           :foreign_key => "offer_id",
                           :association_foreign_key => "offer_group_id"
 
-  # accepts_nested_attributes_for :prices, :allow_destroy => true, :reject_if => :all_blank
 
 end
