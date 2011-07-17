@@ -16,7 +16,7 @@ gem 'nokogiri'
 group :development, :test do
   gem 'hirb'
   gem 'thin'
-end˝
+end
 
 gem 'refinerycms',              '0.9.9.21'
 gem 'refinerycms-search',       '~> 0.9.8'
