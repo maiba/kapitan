@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616082707) do
+ActiveRecord::Schema.define(:version => 20110716160804) do
 
   create_table "account_attachments", :force => true do |t|
     t.integer  "account_id"
@@ -140,12 +140,12 @@ ActiveRecord::Schema.define(:version => 20110616082707) do
   end
 
   create_table "offer_prices", :force => true do |t|
-    t.integer  "offer_group_id"
     t.integer  "offer_id"
     t.float    "price"
-    t.integer  "percentage"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "priceable_id"
+    t.string   "priceable_type"
   end
 
   create_table "offers", :force => true do |t|
@@ -158,6 +158,11 @@ ActiveRecord::Schema.define(:version => 20110616082707) do
   end
 
   add_index "offers", ["id"], :name => "index_proposals_on_id"
+
+  create_table "offers_offer_groups", :id => false, :force => true do |t|
+    t.integer "offer_id"
+    t.integer "offer_group_id"
+  end
 
   create_table "page_part_translations", :force => true do |t|
     t.integer  "page_part_id"
@@ -218,9 +223,18 @@ ActiveRecord::Schema.define(:version => 20110616082707) do
   add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
   add_index "pages", ["rgt"], :name => "index_pages_on_rgt"
 
-  create_table "proposals_services", :id => false, :force => true do |t|
-    t.integer "proposal_id"
-    t.integer "service_id"
+  create_table "properties", :force => true do |t|
+    t.string   "name"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "property_list_options", :force => true do |t|
+    t.string   "name"
+    t.integer  "property_list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "refinery_settings", :force => true do |t|
