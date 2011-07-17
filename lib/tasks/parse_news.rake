@@ -26,12 +26,18 @@ namespace :parse do
       )
     end
 
-    last_saved = NewsItem.order("created_at desc").last
+    last_saved = NewsItem.select("title").order("created_at desc").limit(10)
+    last_saved.each do |item|
+      puts item.title
+    end
 
-    item_to_save = news.detect {|item| !(item.title.eql?(last_saved.title))}
-    puts item_to_save.title
+    item_to_save = news.detect {|item|  !(last_saved.include?(item.title)) }
 
-    news_item = NewsItem.new(item_to_save.title, item_to_save.content, item_to_save.link)
+    news_item = NewsItem.new
+    news_item.title = item_to_save.title
+    news_item.content = item_to_save.content
+    news_item.link = "http://www.proreklamu.com" + item_to_save.link
+    puts item_to_save.link
     news_item.save
   end
 end

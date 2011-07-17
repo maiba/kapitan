@@ -8,8 +8,4 @@ class NewsItem < ActiveRecord::Base
 
   default_scope order('created_at DESC')
 
-  def initialize (title, content, link)
-    @title, @content, @link = title, content, link
-  end
-
 end

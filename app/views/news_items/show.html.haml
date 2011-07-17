@@ -3,3 +3,7 @@
   %h1= @news_item.title
   .content.white-pad
     =raw @news_item.content
+  -if @news_item.link
+    .content
+      = "Источник"
+      = link_to @news_item.title, @news_item.link
