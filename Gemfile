@@ -11,10 +11,12 @@ gem 'paperclip'
 gem 'meta_search'
 gem 'meta_where'
 gem 'rack-rewrite', '~> 1.0.0'
+gem 'nokogiri'
+
 group :development, :test do
   gem 'hirb'
   gem 'thin'
-end
+end˝
 
 gem 'refinerycms',              '0.9.9.21'
 gem 'refinerycms-search',       '~> 0.9.8'
