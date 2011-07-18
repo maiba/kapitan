@@ -8,10 +8,11 @@ gem 'haml'
 gem 'russian'
 gem "crummy", ">= 1.0.1"
 gem 'paperclip'
-gem 'meta_search'
+gem 'meta_search', '<= 1.0.4'
 gem 'meta_where'
 gem 'rack-rewrite', '~> 1.0.0'
 gem 'nokogiri'
+gem 'whenever'
 
 group :development, :test do
   gem 'hirb'

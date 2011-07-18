@@ -31,7 +31,7 @@ namespace :parse do
       puts item.title
     end
 
-    item_to_save = news.detect {|item|  !(last_saved.include?(item.title)) }
+    item_to_save = news.detect {|item|  !(last_saved.include?(item.title))}
 
     news_item = NewsItem.new
     news_item.title = item_to_save.title
