@@ -1,5 +1,7 @@
 class Ad < ActiveRecord::Base
 
+  SIDES = %w(left right)
+
   acts_as_indexed :fields => [:title, :content]
 
   validates :title, :presence => true, :uniqueness => true
@@ -8,7 +10,7 @@ class Ad < ActiveRecord::Base
 
   scope :side, lambda { |side| where({:side => side} | {:side => ''} | {:side => nil}) }
 
-  SIDES = %w(left right)
+
 
   validates_inclusion_of :side, :in => %w(left right), :if => 'side.any?'
 

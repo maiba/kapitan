@@ -8,7 +8,7 @@
         = link_to "Личный кабинет", cabinet_root_path
       - else
         = link_to "Вход в личный кабинет", new_account_session_path
-    - Page.in_left_menu.order('lft').each do |page|
+    - Page.where(:show_in_left_menu => true).order('lft').each do |page|
       %li= link_to page.title, page.url
 - unless @show_bottom_part
   .ad

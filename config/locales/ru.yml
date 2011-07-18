@@ -4,3 +4,12 @@ ru:
       form_advanced_options:
         show_in_left_menu_title: Отображать в левом меню
         show_in_left_menu_description: Отображать эту страницу в левом меню сайта
+        
+    offers:
+      form:
+        add_property: Добавить свойство        
+      offer_property_fields:
+        add_option: Добавить опцию
+        remove_property: Удалить свойство
+      offer_property_option_fields:
+        remove_option: Удалить опцию

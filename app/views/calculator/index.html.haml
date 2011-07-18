@@ -1,0 +1,32 @@
+- content_for :body_content_title, @page.title
+- content_for :title, @page.title
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function() {
+      $('select.service_offer_groups').change(function() {
+        $.getJSON("#{calculator_offers_path}", { id: this.value }, function(data){
+         alert(data);
+        });
+      });
+    });
+
+
+- Service.all.each do |service|
+  .service.content.white-pad
+    %h2= service.title
+    = label_tag "service_id_#{service.id}", "Группы услуг"
+    %select.service_offer_groups{ :id => "service_id_#{service.id}", :'data-id' => service.id }
+      - service.offer_groups.each do |offer_group|
+        %option{ :value => offer_group.id }= offer_group.title
+
+        -# = label_tag "offer_group_id_#offer_group.id}", offer_group.title
+        -# %h3= offer_group.title
+        -# - offer_group.offers.each do |offer|
+        -#   .offer
+        -#     %h4= offer.title
+        -#     - offer.offer_properties.each do |offer_porperty|
+        -#       = label_tag "offer_porperty_id_#{offer_porperty.id}", offer_porperty.title
+        -#       %select{ :id => "offer_porperty_id_#{offer_porperty.id}"}
+        -#         - offer_porperty.offer_property_options.each do |option|
+        -#           %option{ :value => option.id, :'data-price' => option.price }
+        -#             = option.title

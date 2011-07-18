@@ -1,26 +1,137 @@
-<!DOCTYPE html>
+<!DOCTYPE HTMLs>
 <html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
-</head>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="css/all.css" type="text/css">
+		<title>404 Kapitan.kh.ua</title>
+		<style type="text/css" media="screen">
+		  body {
+          background: url(/images/bg-body.jpg) repeat;
+          color: #333333;
+          font: 12px/1.3 Verdana,sans-serif;
+          height: 100%;
+          margin: 0;
+          min-width: 1000px;
+          padding: 0;
+          top: 0;
+          width: 100%;
+      }
+      a {outline:none;text-decoration:none;}
+      a:hover {text-decoration:underline;}
+      img {border:none}
 
-<body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-  </div>
-</body>
+      #wrap {
+          height: auto !important;
+          min-height: 100%;
+      }
+      #header {
+          height: 188px;
+          margin-left: auto;
+          margin-right: auto;
+          padding-top: 10px;
+          width: 1000px;
+      }
+      #logo {
+      	background: url(/images/logo.png) no-repeat;
+       	margin: 0 0 0 5px;	
+      	width:245px;
+          height:188px;
+      	display:block;
+      	overflow:hidden;
+      	float:left;
+          position: absolute;
+          z-index: 10;	
+      }
+      #logo a {
+      	width:245px;
+          height:188px;
+      	display:block;
+      	overflow:hidden;
+      	text-indent:-1000px;
+      }
+      h1 {
+      	margin:0;
+      	padding:0;
+      }
+      .error404 {
+      	position:absolute;
+      	text-indent:-1000px;
+      	background: url(/images/error404.png) no-repeat;
+      	width:684px;
+          z-index: 10;	
+      	height:110px;
+      	margin:10px 0 0 278px;
+      }
+      .return {
+          background: #874487;
+          height: 53px;
+          top:145px;
+      	left:0;
+          min-width: 1000px;
+          position: absolute;
+          width: 100%;
+          z-index: 1;	
+      }
+      .return-text{
+      	position:absolute;
+      	margin:0 0 0 278px;
+      	float:right;
+      	top:152px;
+      	font-size:30px;
+          z-index: 10;	
+      	color:#e5def4;
+      	font-family: "Georgia";
+      }
+      .return-text a:hover {
+      	text-decoration:none;	
+      }
+      .return-text a {
+      	color:#e5def4;
+      	text-decoration:underline;	
+      }
+      #main .photo {
+      	background: url(/images/img.jpg) no-repeat center;	
+      	height:536px;
+      	margin:30px 0 0 0;
+      }
+      #footer {
+      	clear:both;
+       	width: 1000px;
+      	margin:12px auto;
+      	color:#24299b;
+      	font-size:10px;
+      }
+      #footer a {
+      	color:#24299b;	
+      }
+      .gagarin {
+      	padding:0 0 12px 40px;
+      	float:left;
+      }
+      .copyright {
+      	padding:0 40px 12px 0;
+      	float:right;
+      }
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+				<h1 id="logo">
+				  <a href="http://www.kapitan.kh.ua">Kapitan.kh.ua</a>
+				</h1>
+				<div class="error404">404</div>
+				<div class="return-text">Вы еще можете спастись, вернувшись на <a href="#">главную</a></div>
+				<div class="return">
+				</div>			
+			</div>
+			<div id="main">
+				<div class="photo"></div>
+			</div>
+			<div id="footer">
+				<div class="gagarin">Project studio - <a href="http://gagarin.in.ua">GAGARIN</a></div>	
+				<div class="copyright">Copyright © Капитан, 2011</div>
+			</div>
+		</div>
+	</body>
 </html>

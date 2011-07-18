@@ -16,6 +16,7 @@ class PagesController < ApplicationController
   #   GET /pages/mission
   #   GET /about/mission
   #
+
   def show
     page_path = "#{params[:path]}/#{params[:id]}".split('/')
     @page = Page.find(page_path.last)

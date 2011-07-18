@@ -1,14 +1,43 @@
+- content_for :javascripts, javascript_include_tag(:cocoon)
+- content_for :stylesheets do
+  :plain
+    <style type="text/css" media="screen">
+      fieldset {
+        padding: 20px;
+        margin-top: 10px;
+      }
+      #content a.add_fields{
+        display: block;
+        margin-top: 10px;
+        color: green;
+        border-bottom:none;
+      }
+      #content a.remove_fields{
+        color: red;
+        border-bottom:none;
+      }
+    </style>
+
 = form_for [:admin, @offer] do |f|
   = render "/shared/admin/error_messages", :object => @offer, :include_object_name => true
   .field
     = f.label :title
     = f.text_field :title, :class => 'larger widest'
-  
-  .field
-    = f.label :suffix
-    = f.text_field :suffix
   .field
     = f.label :photo
     = render "/shared/admin/image_picker", :f => f, :field => :photo_id, :image => @offer.photo, :toggle_image_display => false
-  
+  .field
+    = f.label :offer_groups
+    - Offer::Group.order(:title).all.each do |offer_group|
+      %div{:style => "float:left;width:30%;"}
+        = check_box_tag "offer[offer_group_ids][]", offer_group.id, @offer.offer_groups.include?(offer_group), :id => "offer_offer_group_id_#{offer_group.id}"
+        = label_tag "offer_offer_group_id_#{offer_group.id}", offer_group.title, :class => "stripped"
+    .clearfix
+  .field
+    = f.label :offer_properties
+    = f.fields_for :offer_properties do |op_f|
+      = render 'offer_property_fields', :f => op_f
+    .links
+      = link_to_add_association t('.add_property'), f, :offer_properties
+
   = render "/shared/admin/form_actions", :f => f, :continue_editing => false, :delete_title => t('delete', :scope => 'admin.offers.offer'), :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @offer.title)

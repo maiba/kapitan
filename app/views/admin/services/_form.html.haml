@@ -18,13 +18,6 @@
       %div
         = check_box_tag "service[offer_group_ids][]", offer_group.id, @service.offer_groups.include?(offer_group),:id => "service_offer_group_id_#{offer_group.id}"
         = label_tag "service_offer_group_id_#{offer_group.id}", offer_group.title, :class => "stripped"
-  -# .field
-  -#   = f.label :proposals
-  -#   - Proposal.all.each do |proposal|
-  -#     %div
-  -#       = check_box_tag "service[proposal_ids][]", proposal.id, @service.proposals.include?(proposal),:id => "service_proposal_id_#{proposal.id}"
-  -#       = label_tag "service_proposal_id_#{proposal.id}", proposal.title, :class => "stripped"
-
   .field
     #page-tabs.clearfix.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
       %ul#page_parts

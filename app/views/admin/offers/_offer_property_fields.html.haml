@@ -1,0 +1,12 @@
+%fieldset.nested-fields
+  %legend= f.object.class.model_name.human
+  .field
+    = f.label :title, :class => "stripped"
+    = f.text_field :title
+    %fieldset
+      %legend= f.object.class.human_attribute_name :offer_property_options
+      = f.fields_for :offer_property_options do |opo_f|
+        = render 'offer_property_option_fields', :f => opo_f
+      .links
+        = link_to_add_association t('.add_option'), f, :offer_property_options
+  = link_to_remove_association t('.remove_property'), f, :style => 'float:right;margin-top:10px;'

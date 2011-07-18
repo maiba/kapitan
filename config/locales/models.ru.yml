@@ -6,6 +6,9 @@ ru:
       account: Аккаунт
       inquiry: Запрос
       account_attachment: Файлы пользователя
+      offer: Предложение
+      offer/property: Свойство
+      offer/property/option: Опция
 
     attributes:
 
@@ -35,6 +38,19 @@ ru:
         email: Эл. почта
         phone: Телефон
         message: Сообщение
+
+      offer:
+        title: Название
+        offer_groups: Группы предложений
+        offer_properties: Свойства
+
+        property:
+          title: Имя
+          offer_property_options: Опции
+
+          option:
+            title: Пункт
+            price: Цена
 
       partner:
         title: Заголовок

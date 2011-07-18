@@ -21,15 +21,4 @@ class Offer::Group < ActiveRecord::Base
                           :foreign_key => "offer_group_id",
                           :association_foreign_key => "offer_id"
 
-
-  def all_offer_prices
-    (self.offer_prices + not_assigned_offer_prices).compact
-  end
-
-  def not_assigned_offer_prices
-    Offer.all.map do |offer|
-      offer.prices.build(:offer_group_id => self.id) unless self.offers.include?(offer)
-    end
-  end
-
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110716160804) do
+ActiveRecord::Schema.define(:version => 20110718221635) do
 
   create_table "account_attachments", :force => true do |t|
     t.integer  "account_id"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20110716160804) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "link"
   end
 
   add_index "news_items", ["id"], :name => "index_news_items_on_id"
@@ -139,18 +140,23 @@ ActiveRecord::Schema.define(:version => 20110716160804) do
     t.integer "service_id"
   end
 
-  create_table "offer_prices", :force => true do |t|
+  create_table "offer_properties", :force => true do |t|
+    t.string   "title"
     t.integer  "offer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "offer_property_options", :force => true do |t|
+    t.integer  "offer_property_id"
+    t.string   "title"
     t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "priceable_id"
-    t.string   "priceable_type"
   end
 
   create_table "offers", :force => true do |t|
     t.string   "title"
-    t.string   "suffix"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -222,20 +228,6 @@ ActiveRecord::Schema.define(:version => 20110716160804) do
   add_index "pages", ["lft"], :name => "index_pages_on_lft"
   add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
   add_index "pages", ["rgt"], :name => "index_pages_on_rgt"
-
-  create_table "properties", :force => true do |t|
-    t.string   "name"
-    t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "property_list_options", :force => true do |t|
-    t.string   "name"
-    t.integer  "property_list_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "refinery_settings", :force => true do |t|
     t.string   "name"
