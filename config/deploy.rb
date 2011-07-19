@@ -39,7 +39,7 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run %|[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` /|/| #{unicorn_rails} -Dc #{unicorn_conf}|
+    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}|"
   end
 
   desc "Run the migrate rake task"
@@ -58,7 +58,7 @@ end
 namespace :bundler do
   desc "Update bundler gems"
   task :update, roles => :app do
-    run "cd #{current_release} && #{bundle} update"
+    run "cd #{current} && #{bundle} update"
   end
 
   desc "Install bundler gems"
