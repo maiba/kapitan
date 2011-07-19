@@ -1,6 +1,6 @@
 class Offer < ActiveRecord::Base
 
-  acts_as_indexed :fields => [:title, :suffix]
+  acts_as_indexed :fields => [:title]
 
   validates :title, :presence => true
 

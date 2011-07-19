@@ -5,8 +5,11 @@ class CalculatorController < ApplicationController
   end
 
   def offers
-    offers = Offer::Group.find(params[:id]).offers
-    render :json => offers
+    render :json => Offer::Group.find(params[:id]).offers.to_json(:only => [ :id, :title ])
+  end
+
+  def properties
+    render :json => Offer.find(params[:id]).offer_properties.to_json(:only => [ :id, :title ], :include => { :offer_property_options => { :only => [:id, :title, :price] } })
   end
 
 end
