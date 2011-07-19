@@ -3,67 +3,156 @@
 - content_for :javascripts do
   :javascript
     $(document).ready(function() {
-      $('select.service_offer_groups').change(function() {
-        var offer_groups_select = $(this);
-        if (this.value != ''){
-          $.getJSON("#{calculator_offers_path}", { id: this.value }, function(offers){
-            if (!offers || offers.length == 0){
-              return false;
-            }
-            var offers_options = '<option value="">Выберите услугу</option>';
-            for (var i=0; i < offers.length; i++) {
-              var offer = offers[i];
-              offers_options += '<option value="'+offer.id+'">'+offer.title+'</option>';
-            };
-            offer_groups_select
-              .parents('.offer-groups-container')
-              .find('select.service_offer_group_offers')
-              .html(offers_options)
-              .parents('.offers-container')
-              .slideDown();
-          });
+      
+      $('.spoiler').click(function() {
+        var spoiler = $(this),
+            service = spoiler.prev('.content').find('.service-container');
+      
+        if (spoiler.hasClass('open')){
+          spoiler.removeClass('open');
+          service.slideUp();
         } else {
-          offer_groups_select.siblings('.offers-container').slideUp();
+          $('.spoiler').removeClass('open');
+          $('.service-container').slideUp();
+          spoiler.addClass('open');
+          service.slideDown();
         }
+      }).filter(':first').click();
+      
+      $('#calculator .service-title').click(function() {
+        $(this).parent().next('.spoiler').click();
       });
       
-      $('select.service_offer_group_offers').live('change', function(){
-        var offers_select = $(this);  
-        if (this.value != ''){
-          $.getJSON("#{calculator_properties_path}", {id: this.value}, function(properties){
-            if (!properties || properties.legnth == 0)
-              return false;
-            var properties_html = '';
-            for (var i=0; i < properties.length; i++) {
-              var property = properties[i];
-              properties_html += '<div><label for="property_id_'+property.id+'">'+property.title+'</label><select id="property_id_'+property.id+'">';
-              for (var ii=0; ii < property.offer_property_options.length; ii++) {
-                var option = property.offer_property_options[ii];
-                properties_html += '<option value="'+option.id+'" data-price="'+option.price+'">'+option.title+'</option>';
+      function Reset(service){
+        this.offers = function() {
+          service.find('.offers-container').slideUp();
+          this.properties();
+        };
+        
+        this.properties = function() {
+          service.find('.properties-container').slideUp();
+          service.find('.price').slideUp();
+        };
+      };
+      
+      function Draw(scope){
+        var offer_groups_select = scope.find('select.offer_groups'),
+            offers_container = scope.find('.offers-container'),
+            offers_select = scope.find('select.offers'),
+            properties_container = scope.find('.properties-container'),
+            price = scope.find('.price'),
+            price_holder = scope.find('.price_holder'),
+            add_to_cart_button = scope.find('.add_to_cart'),
+            reset = new Reset(scope);        
+        
+        this.offers = function(){
+          if (offer_groups_select.val() != ''){
+            $.getJSON("#{calculator_offers_path}", { id: offer_groups_select.val() }, function(offers){
+              if (!offers || offers.length == 0){
+                reset.offers();
+                return false;
+              }
+              var offers_options = '<option value="">Выберите услугу</option>';
+              for (var i=0; i < offers.length; i++) {
+                var offer = offers[i];
+                offers_options += '<option value="'+offer.id+'">'+offer.title+'</option>';
               };
-              properties_html += '</select></div>';
-            };
-            offers_select.siblings('.properties-container').html(properties_html).slideDown();
+              offers_container.stop(true,true).slideDown();
+              offers_select.html(offers_options);
+            });
+          } else {
+            reset.offers();
+          }
+        };
+        
+        this.properties = function(){
+          if (offers_select.val() != ''){
+            $.getJSON("#{calculator_properties_path}", { id: offers_select.val() }, function(properties){
+              if (!properties || properties.legnth == 0){
+                reset.properties();
+                return false;
+              }
+              var properties_html = '';
+              for (var i=0; i < properties.length; i++) {
+                var property = properties[i];
+                properties_html += ' \
+                  <div class="field"> \
+                    <label for="property_'+property.id+'">'+property.title+'</label> \
+                    <select id="property_'+property.id+'" class="property"> \
+                      <option value="">------</option> \
+                ';
+                for (var ii=0; ii < property.offer_property_options.length; ii++) {
+                  var option = property.offer_property_options[ii];
+                  properties_html += '<option value="'+option.price+'">'+option.title+'</option>';
+                };
+                properties_html += '</select></div>';
+              };
+              properties_container.html(properties_html).stop(true,true).slideDown();
+              price.stop(true,true).slideDown();
+              price_holder.html('0.00');
+            });
+          } else {
+            reset.properties();
+          }
+        };
+        
+        this.price = function(property_select) {
+          var not_all_selected = false,
+              total_price = 0.00;
+          
+          scope.find('select.property').each(function() {
+            if ( this.value && this.value != '' ){
+              var price_value = parseFloat(this.value);
+              if (price_value != NaN)
+                total_price += price_value
+            } else {
+              not_all_selected = true;
+            }
           });
-        } else {
-          offers_select.siblings('.properties-container').slideUp(function() {
-            $(this).empty();
-          });
-        }
+          price_holder.html(total_price);
+          if (not_all_selected){
+            if (add_to_cart_button.is(':visible'))
+              add_to_cart_button.hide('slide');
+          } else {
+            if (add_to_cart_button.is(':hidden'))
+              add_to_cart_button.show('slide');
+          }
+        };
+      }
+            
+      $('select.offer_groups').live('change', function() {
+        new Draw($(this).parents('.service-container')).offers();
+      });
+      $('select.offers').live('change', function(){
+        new Draw($(this).parents('.service-container')).properties();
+      });
+      $('select.property').live('change', function() {
+        new Draw($(this).parents('.service-container')).price($(this));
       });
     });
 
-
-- Service.all.each do |service|
-  .service.content.white-pad
-    %h2= service.title
-    .offer-groups-container
-      = label_tag "service_id_#{service.id}", "Тип"
-      %select.service_offer_groups{ :id => "service_id_#{service.id}", :'data-id' => service.id }
-        %option{ :value => '' } Выберите Тип
-        - service.offer_groups.each do |offer_group|
-          %option{ :value => offer_group.id }= offer_group.title
-      .offers-container{ :style => "display:none;" }
-        = label_tag "service_id_#{service.id}_offers", "Услуги"
-        %select.service_offer_group_offers{ :id => "service_id_#{service.id}_offers" }
+#calculator
+  - Service.all.each do |service|
+    .content.white-pad
+      %h3.service-title= service.title
+      .service-container{ :style => 'display:none;'}
+        %h4 Расчет индивидуального заказа
+        .field.offer_groups-container
+          = label_tag "service_#{service.id}_offer_groups", "Тип"
+          %select.offer_groups{ :id => "service_#{service.id}_offer_groups", :'data-id' => service.id }
+            %option{ :value => '' } Выберите Тип
+            - service.offer_groups.each do |offer_group|
+              %option{ :value => offer_group.id }= offer_group.title
+        .field.offers-container{ :style => "display:none;" }
+          = label_tag "service_#{service.id}_offers", "Услуги"
+          %select.offers{ :id => "service_#{service.id}_offers" }
         .properties-container{ :style => "display:none;" }
+        .price{ :style => 'display:none;' }
+          Сумма:
+          %span.price_holder 0.00
+          грн.
+        .add_to_cart.button{ :style => 'display:none;' } Заказать
+        .clearfix
+    .spoiler
+      .arrow
+      .clearfix

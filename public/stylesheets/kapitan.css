@@ -585,20 +585,17 @@ form .field input[type="email"] {
 	padding-left: 1%;
 }
 
-form .field input[type="submit"] {
+form .field input[type="submit"], .button {
 
-	background-image: -moz-linear-gradient(top, #ffffff, #cccccc);
+	background-image: -moz-linear-gradient(top, #fefefe, #b8b8b8);
 	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #fefefe),color-stop(1, #b8b8b8));
 	background-image: linear-gradient(top, #fefefe, #b8b8b8);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fefefe', EndColorStr='#b8b8b8');
 	-moz-border-radius: 4px; 
 	-webkit-border-radius: 4px; 
 	border-radius: 4px;
-
-	height: 26px;	
 	border: 1px solid #888888;
 	text-align: center;
-	padding: 1px 1em;
 	display: inline-block;
 	font-size: 13px;
 	text-shadow: #ffffff 0 1px 1px;	
@@ -607,18 +604,23 @@ form .field input[type="submit"] {
 	outline: none;
 	float: right;
 	margin-right: 3%;
+	padding: 0.4em 1em;
+	cursor: pointer;
+}
+.button{
+	margin-right: 0;
 }
 
-form .field input[type="submit"]:hover {
+form .field input[type="submit"]:hover, .button:hover {
 	border-color: #565656;
 }
 
-form .field input[type="submit"]:focus {
+form .field input[type="submit"]:focus, .button:focus {
 	
 	border-color: #565656;
 }
 
-form .field input[type="submit"]:active {
+form .field input[type="submit"]:active, .button:active {
 	
 	-moz-box-shadow: inset 0px 2px 5px #494949;
 	-webkit-box-shadow: inset 0px 2px 5px #494949;
@@ -1606,5 +1608,78 @@ img.avatar.normal {
 /* @group courier */
 
 table.border, table.border td {border: 1px solid black;}
+
+/* @end */
+
+/* @group calculator */
+
+#calculator {
+	width: 450px;
+}
+
+#calculator .service-title {
+	color: #24299b;
+	cursor: pointer;
+}
+
+#calculator .spoiler {
+	margin-top: -15px;
+	cursor: pointer;
+	background-color: rgba(0,0,0,0.1);
+}
+
+#calculator .spoiler:hover {
+	background-color: rgba(0,0,0,0.15);
+}
+
+#calculator .spoiler .arrow {
+	width: 20px;
+	height: 13px;
+	float: right;
+	margin-top: 5px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	background: url(/images/arrows-spoiler.png) 0 -13px;
+}
+
+#calculator .spoiler.open .arrow {
+	background-position: 0 0;
+}
+
+#calculator .field {
+	margin-bottom: 0.7em;
+}
+
+#calculator .field label {
+	display: inline-block;
+	width: 25%;
+}
+
+#calculator .field select {
+	width: 70%;
+}
+
+#calculator .price {
+	border: 1px solid #e7e7e7;
+	float: left;
+	background-image: -moz-linear-gradient(top, #ffffff, #f5f5f5);
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #f5f5f5));
+	background-image: linear-gradient(top, #ffffff, #f5f5f5);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#f5f5f5');
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px; 
+	border-radius: 4px;
+	padding: 0.4em 0.5em;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	font-size: 13px;
+}
+
+#calculator .add_to_cart {
+	float: left;
+	margin-left: -4px;
+}
+
+
 
 /* @end */
