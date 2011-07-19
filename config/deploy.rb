@@ -39,7 +39,7 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}|"
+    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}"
   end
 
   desc "Run the migrate rake task"
