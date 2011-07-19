@@ -4,8 +4,15 @@ class ApplicationController < ActionController::Base
 
   add_crumb "Главная", '/'
 
+  rescue_from ActiveRecord::RecordNotFound, ActionController::UnknownAction, ActionView::MissingTemplate, :with => :error_404
 
 private
+
+  def error_404
+    render :file => Rails.root.join('public', '404.html').cleanpath.to_s,
+           :layout => false,
+           :status => 404
+  end
 
   def show_bottom
     @show_bottom_part = true

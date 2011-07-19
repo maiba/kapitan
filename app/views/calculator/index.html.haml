@@ -1,0 +1,69 @@
+- content_for :body_content_title, @page.title
+- content_for :title, @page.title
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function() {
+      $('select.service_offer_groups').change(function() {
+        var offer_groups_select = $(this);
+        if (this.value != ''){
+          $.getJSON("#{calculator_offers_path}", { id: this.value }, function(offers){
+            if (!offers || offers.length == 0){
+              return false;
+            }
+            var offers_options = '<option value="">Выберите услугу</option>';
+            for (var i=0; i < offers.length; i++) {
+              var offer = offers[i];
+              offers_options += '<option value="'+offer.id+'">'+offer.title+'</option>';
+            };
+            offer_groups_select
+              .parents('.offer-groups-container')
+              .find('select.service_offer_group_offers')
+              .html(offers_options)
+              .parents('.offers-container')
+              .slideDown();
+          });
+        } else {
+          offer_groups_select.siblings('.offers-container').slideUp();
+        }
+      });
+      
+      $('select.service_offer_group_offers').live('change', function(){
+        var offers_select = $(this);  
+        if (this.value != ''){
+          $.getJSON("#{calculator_properties_path}", {id: this.value}, function(properties){
+            if (!properties || properties.legnth == 0)
+              return false;
+            var properties_html = '';
+            for (var i=0; i < properties.length; i++) {
+              var property = properties[i];
+              properties_html += '<div><label for="property_id_'+property.id+'">'+property.title+'</label><select id="property_id_'+property.id+'">';
+              for (var ii=0; ii < property.offer_property_options.length; ii++) {
+                var option = property.offer_property_options[ii];
+                properties_html += '<option value="'+option.id+'" data-price="'+option.price+'">'+option.title+'</option>';
+              };
+              properties_html += '</select></div>';
+            };
+            offers_select.siblings('.properties-container').html(properties_html).slideDown();
+          });
+        } else {
+          offers_select.siblings('.properties-container').slideUp(function() {
+            $(this).empty();
+          });
+        }
+      });
+    });
+
+
+- Service.all.each do |service|
+  .service.content.white-pad
+    %h2= service.title
+    .offer-groups-container
+      = label_tag "service_id_#{service.id}", "Тип"
+      %select.service_offer_groups{ :id => "service_id_#{service.id}", :'data-id' => service.id }
+        %option{ :value => '' } Выберите Тип
+        - service.offer_groups.each do |offer_group|
+          %option{ :value => offer_group.id }= offer_group.title
+      .offers-container{ :style => "display:none;" }
+        = label_tag "service_id_#{service.id}_offers", "Услуги"
+        %select.service_offer_group_offers{ :id => "service_id_#{service.id}_offers" }
+        .properties-container{ :style => "display:none;" }

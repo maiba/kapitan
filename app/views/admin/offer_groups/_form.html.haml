@@ -16,25 +16,33 @@
         = check_box_tag "offer_group[service_ids][]", service.id, @offer_group.services.include?(service), :id => "offer_group_service_id_#{service.id}"
         = label_tag "offer_group_service_id_#{service.id}", service.title, :class => "stripped"
   .field
-    = f.label :offer_prices
-    = f.fields_for :offer_prices, @offer_group.all_offer_prices do |op_f|
-      -# = op_f.object.inspect
-      -# %br
+    = f.label :offers
+    - Offer.all.each do |offer|
       %div
-        %div
-          = op_f.object.offer.title
-          за
-          = op_f.object.offer.suffix
-        = op_f.hidden_field :offer_id
-        = op_f.hidden_field :offer_group_id
-        = op_f.text_field :price
-        грн. +
-        = op_f.text_field :percentage
-        процентов
-        - unless op_f.object.new_record?
-          = op_f.check_box :_destroy
-          Удалить?
-      %br
+        = check_box_tag "offer_group[offer_ids][]", offer.id, @offer_group.offers.include?(offer), :id => "offer_group_offer_id_#{offer.id}"
+        = label_tag "offer_group_offer_id_#{offer.id}", offer.title, :class => "stripped"
+
+  -# .field
+  -#   = f.label :offer_prices
+  -#   = f.fields_for :offer_prices, @offer_group.all_offer_prices do |op_f|
+  -#     -# = op_f.object.inspect
+  -#     -# %br
+  -#     %div
+  -#       %div
+  -#         = op_f.object.offer.title
+  -#         за
+  -#         = op_f.object.offer.suffix
+  -#       = op_f.hidden_field :offer_id
+  -#       = op_f.hidden_field :offer_group_id
+  -#       = op_f.text_field :price
+  -#       грн. +
+  -#       = op_f.text_field :percentage
+  -#       процентов
+  -#       - unless op_f.object.new_record?
+  -#         = op_f.check_box :_destroy
+  -#         Удалить?
+  -#     %br
+
   .field
     #page-tabs.clearfix.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
       %ul#page_parts

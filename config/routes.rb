@@ -39,22 +39,37 @@ Kapitan::Application.routes.draw do
     resources :offer_groups, :only => [:show], :controller => 'service/offer_groups'
   end
 
-  scope(:path => 'refinery', :as => 'admin', :module => 'admin') do
+  get :calculator, :to => "calculator#index"
+  get 'calculator/offers', :to => "calculator#offers"
+  get 'calculator/properties', :to => "calculator#properties"
+  scope :path => 'refinery', :as => 'admin', :module => 'admin' do
     resources :ads, :except => :show do
       post :update_positions, :on => :collection
     end
     resources :articles, :except => :show do
+
       post :update_positions, :on => :collection
     end
+
     resources :news_items, :except => :show do
       post :update_positions, :on => :collection
     end
+
     resources :offer_groups, :except => :show do
       post :update_positions, :on => :collection
     end
+
     resources :services, :except => :show do
       post :update_positions, :on => :collection
     end
+
+    resources :properties, :except => :show
+
+    namespace :property, :module => nil do
+      resources :booleans, :except => :show, :controller => 'properties'
+      resources :lists, :except => :show, :controller => 'properties'
+    end
+
     resources :offers, :except => :show do
       post :update_positions, :on => :collection
     end
