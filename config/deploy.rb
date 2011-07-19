@@ -7,6 +7,7 @@ set :scm, :git
 set :use_sudo, false
 set :user, "hosting_#{account}"
 set :deploy_to, "/home/#{user}/projects/#{application}"
+set :current, "#{deploy_to}/current"
 set :bundle, "/var/lib/gems/1.8/bin/bundle"
 set :rake, "#{bundle} exec rake"
 set :rails_env, "production"
@@ -28,7 +29,7 @@ end
 namespace :deploy do
   desc "Start application"
   task :start, :roles => :app do
-    run "cd #{current_release} && #{bundle} exec unicorn_rails -Dc #{unicorn_conf}"
+    run "cd #{current} && #{bundle} exec unicorn_rails -Dc #{unicorn_conf}"
   end
 
   desc "Stop application"
@@ -43,7 +44,7 @@ namespace :deploy do
 
   desc "Run the migrate rake task"
   task :migrate, :roles => :db, :only => { :primary => true } do
-    run "cd #{current_release}; #{rake} RAILS_ENV=#{rails_env} db:migrate"
+    run "cd #{current} && #{rake} db:migrate"
   end
 
   desc "Make symlinks for application config files"

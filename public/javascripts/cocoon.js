@@ -1,10 +1,9 @@
 $(document).ready(function() {
 
   function replace_in_content(content, regexp_str, with_str) {
-      reg_exp = new RegExp(regexp_str);
-      content.replace(reg_exp, with_str);
+    reg_exp = new RegExp(regexp_str);
+    content.replace(reg_exp, with_str);
   }
-
 
   $('.add_fields').live('click', function(e) {
     e.preventDefault();
@@ -41,23 +40,19 @@ $(document).ready(function() {
     else
       insertionNode.before(contentNode);
 
-
     if (insertionCallback)
       insertionCallback.call(contentNode);
-
   });
 
   $('.remove_fields.dynamic').live('click', function(e) {
     e.preventDefault();
     $(this).closest(".nested-fields").remove();
-    return false;
   });
 
   $('.remove_fields.existing').live('click', function(e) {
     e.preventDefault();
     $(this).prev("input[type=hidden]").val("1");
     $(this).closest(".nested-fields").hide();
-    return false;
   });
 
 });
