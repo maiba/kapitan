@@ -1,9 +1,9 @@
 Kapitan::Application.routes.draw do
 
-  constraints(:host => /^(?!www\.)/) do
-    root :to => redirect("http://www.kapitan.kh.ua")
-    match '/*path', :to => redirect {|params| "http://www.kapitan.kh.ua/#{params[:path]}"}
-  end if RAILS_ENV == 'production'
+  # constraints(:host => /^(?!www\.)/) do
+  #   root :to => redirect("http://www.kapitan.kh.ua")
+  #   match '/*path', :to => redirect {|params| "http://www.kapitan.kh.ua/#{params[:path]}"}
+  # end if RAILS_ENV == 'production'
 
   devise_for :accounts,
     :path_names => {
