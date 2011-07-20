@@ -108,6 +108,7 @@ ru:
     news_items:
       actions:
         create_new: Добавить новость
+        parse_news: Включить парсер
       records:
         title: Новости
         sorry_no_results: Ничего не найдено

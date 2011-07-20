@@ -37,6 +37,9 @@ Kapitan::Application.routes.draw do
   get :calculator, :to => "calculator#index"
   get 'calculator/offers', :to => "calculator#offers"
   get 'calculator/properties', :to => "calculator#properties"
+
+  get 'admin/news_items/parse_news', :to => "admin/news_items#parse_news"
+  
   scope :path => 'refinery', :as => 'admin', :module => 'admin' do
     resources :ads, :except => :show do
       post :update_positions, :on => :collection
