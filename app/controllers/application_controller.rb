@@ -11,7 +11,7 @@ private
 
   def add_www_subdomain
     unless /^www/.match(request.host) && !(Rails.env == "production")
-      redirect_to("#{request.protocol}www.kapitan.kh.ua/#{request.request_uri}", :status => 301)
+      redirect_to("#{request.protocol}www.kapitan.kh.ua#{request.request_uri}", :status => 301)
     end
   end
 
