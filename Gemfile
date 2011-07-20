@@ -14,6 +14,7 @@ gem 'rack-rewrite', '~> 1.0.0'
 gem 'nokogiri'
 gem 'whenever'
 gem 'cocoon'
+gem 'rack-rewrite', '~> 1.0.0'
 
 group :development, :test do
   gem 'hirb'
