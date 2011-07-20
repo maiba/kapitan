@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 private
 
   def add_www_subdomain
-    unless /^www/.match(request.host) && !(Rails.env == "production")
+    if !(request.host =~ /^www/) && Rails.env == "production"
       redirect_to("#{request.protocol}www.kapitan.kh.ua#{request.request_uri}", :status => 301)
     end
   end
