@@ -79,7 +79,7 @@
                   <div class="field"> \
                     <label for="property_'+property.id+'">'+property.title+'</label> \
                     <select id="property_'+property.id+'" class="property"> \
-                      <option value="">------</option> \
+                      <option value="">Выберите</option> \
                 ';
                 for (var ii=0; ii < property.offer_property_options.length; ii++) {
                   var option = property.offer_property_options[ii];
@@ -130,29 +130,39 @@
         new Draw($(this).parents('.service-container')).price($(this));
       });
     });
-
-#calculator
-  - Service.all.each do |service|
-    .content.white-pad
-      %h3.service-title= service.title
-      .service-container{ :style => 'display:none;'}
-        %h4 Расчет индивидуального заказа
-        .field.offer_groups-container
-          = label_tag "service_#{service.id}_offer_groups", "Тип"
-          %select.offer_groups{ :id => "service_#{service.id}_offer_groups", :'data-id' => service.id }
-            %option{ :value => '' } Выберите Тип
-            - service.offer_groups.each do |offer_group|
-              %option{ :value => offer_group.id }= offer_group.title
-        .field.offers-container{ :style => "display:none;" }
-          = label_tag "service_#{service.id}_offers", "Услуги"
-          %select.offers{ :id => "service_#{service.id}_offers" }
-        .properties-container{ :style => "display:none;" }
-        .price{ :style => 'display:none;' }
-          Сумма:
-          %span.price_holder 0.00
-          грн.
-        .add_to_cart.button{ :style => 'display:none;' } Заказать
-        .clearfix
-    .spoiler
-      .arrow
-      .clearfix
+#calculator-page
+  .left
+    = render '/shared/content_page'
+    #calculator
+      - Service.all.each do |service|
+        .content.white-pad
+          %h3.service-title= service.title
+          .service-container{ :style => 'display:none;'}
+            %h4 Расчет индивидуального заказа
+            .field.offer_groups-container
+              = label_tag "service_#{service.id}_offer_groups", "Тип"
+              %select.offer_groups{ :id => "service_#{service.id}_offer_groups", :'data-id' => service.id }
+                %option{ :value => '' } Выберите Тип
+                - service.offer_groups.each do |offer_group|
+                  %option{ :value => offer_group.id }= offer_group.title
+            .field.offers-container{ :style => "display:none;" }
+              = label_tag "service_#{service.id}_offers", "Услуги"
+              %select.offers{ :id => "service_#{service.id}_offers" }
+            .properties-container{ :style => "display:none;" }
+            .price{ :style => 'display:none;' }
+              Сумма:
+              %span.price_holder 0.00
+              грн.
+            .add_to_cart.button{ :style => 'display:none;' } Заказать
+            .clearfix
+        .spoiler
+          .arrow
+          .clearfix
+  .right
+    #cart
+      .title Корзина рекламодателя
+      .items 
+        Корзина пуста
+      .order-total-price
+      
+  .clearfix

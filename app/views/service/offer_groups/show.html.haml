@@ -8,11 +8,3 @@
     = image_fu @offer_group.photo, '320x140>', :class => 'partner-image', :style => 'float:right;margin-left:15px;'
     = raw @offer_group.content
     .clearfix
-
-  - if @offer_group.offer_prices && @offer_group.offer_prices.any?
-    %ul.offer_prices
-      - @offer_group.offer_prices.each do |offer_price|
-        %li.white-pad
-          = image_fu(offer_price.offer.photo, '210x90>', :style => 'float:right;margin-left:5px;') if offer_price.offer.photo
-          %h4= offer_price.offer.title
-          .clearfix

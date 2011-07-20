@@ -1613,8 +1613,15 @@ table.border, table.border td {border: 1px solid black;}
 
 /* @group calculator */
 
-#calculator {
+#calculator-page .left {
 	width: 450px;
+	float: left;
+}
+
+#calculator-page .right {
+	width: 270px;
+	float: right;
+	margin-top: 36px;
 }
 
 #calculator .service-title {
@@ -1678,6 +1685,18 @@ table.border, table.border td {border: 1px solid black;}
 #calculator .add_to_cart {
 	float: left;
 	margin-left: -4px;
+}
+
+#cart .title {
+	font-size: 16px;
+	color: #ffffff;
+	background: #874487 url(/images/icon-cart-16.png) no-repeat 15px;
+	padding: 0.5em 15px 0.5em 40px;
+}
+
+#cart .items {
+	background-color: rgba(255,255,255,0.5);
+	padding: 10px;
 }
 
 

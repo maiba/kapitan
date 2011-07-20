@@ -2,6 +2,7 @@ class CalculatorController < ApplicationController
 
   def index
     @page = Page.find_by_link_url("/calculator")
+    add_crumb @page.title, calculator_path
   end
 
   def offers

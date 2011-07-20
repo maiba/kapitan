@@ -47,30 +47,18 @@ Kapitan::Application.routes.draw do
       post :update_positions, :on => :collection
     end
     resources :articles, :except => :show do
-
       post :update_positions, :on => :collection
     end
-
     resources :news_items, :except => :show do
       post :update_positions, :on => :collection
     end
-
+    resources :offers, :except => :show do
+      post :update_positions, :on => :collection
+    end
     resources :offer_groups, :except => :show do
       post :update_positions, :on => :collection
     end
-
     resources :services, :except => :show do
-      post :update_positions, :on => :collection
-    end
-
-    resources :properties, :except => :show
-
-    namespace :property, :module => nil do
-      resources :booleans, :except => :show, :controller => 'properties'
-      resources :lists, :except => :show, :controller => 'properties'
-    end
-
-    resources :offers, :except => :show do
       post :update_positions, :on => :collection
     end
   end
