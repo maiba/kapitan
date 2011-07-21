@@ -53,7 +53,6 @@ namespace :deploy do
     run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -s #{shared_path}/db/#{db_file} #{release_path}/db/#{db_file}"
   end
-
 end
 
 namespace :bundler do
