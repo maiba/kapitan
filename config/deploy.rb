@@ -54,10 +54,6 @@ namespace :deploy do
     run "ln -s #{shared_path}/db/#{db_file} #{release_path}/db/#{db_file}"
   end
 
-  desc "Update the crontab file"
-    task :update_crontab, :roles => :db do
-      run "cd #{release_path} && whenever --update-crontab #{application}"
-  end
 end
 
 namespace :bundler do
@@ -76,4 +72,3 @@ after "deploy:update_code", "dragonfly:symlink"
 after "deploy:update_code", "deploy:copy_configs"
 after "deploy:copy_configs", "bundler:install"
 after "bundler:install", "deploy:migrate"
-after "deploy:symlink", "deploy:update_crontab"
