@@ -54,11 +54,9 @@ namespace :deploy do
     run "ln -s #{shared_path}/db/#{db_file} #{release_path}/db/#{db_file}"
   end
 
-  namespace :deploy do
-    desc "Update the crontab file"
-    task :update_crontab, :roles => :db do
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :db do
       run "cd #{current} && whenever --update-crontab #{application}"
-    end
   end
 end
 
