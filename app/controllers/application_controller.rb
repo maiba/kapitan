@@ -3,9 +3,12 @@ class ApplicationController < ActionController::Base
   before_filter :add_www_subdomain
   before_filter :show_bottom
 
+  helper_method :cart
+
   add_crumb "Главная", '/'
 
   rescue_from ActiveRecord::RecordNotFound, ActionController::UnknownAction, ActionView::MissingTemplate, :with => :error_404
+
 
 private
 
@@ -25,6 +28,10 @@ private
 
   def skip_bottom
     @show_bottom_part = false
+  end
+
+  def cart
+    @cart ||= Cart.new(session)
   end
 
 end

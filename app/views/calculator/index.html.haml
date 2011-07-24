@@ -3,7 +3,7 @@
 - content_for :javascripts do
   :javascript
     $(document).ready(function() {
-      
+      $('#cart').scrollfollow();
       $('.spoiler').click(function() {
         var spoiler = $(this),
             service = spoiler.prev('.content').find('.service-container');
@@ -31,7 +31,7 @@
         
         this.properties = function() {
           service.find('.properties-container').slideUp();
-          service.find('.price').slideUp();
+          service.find('.price.property').slideUp();
         };
       };
       
@@ -40,9 +40,9 @@
             offers_container = scope.find('.offers-container'),
             offers_select = scope.find('select.offers'),
             properties_container = scope.find('.properties-container'),
-            price = scope.find('.price'),
-            price_holder = scope.find('.price_holder'),
-            add_to_cart_button = scope.find('.add_to_cart'),
+            price = scope.find('.price.property'),
+            price_holder = price.find('.price_holder'),
+            add_to_cart_button = scope.find('.add_to_cart.properties'),
             reset = new Reset(scope);        
         
         this.offers = function(){
@@ -129,7 +129,13 @@
       $('select.property').live('change', function() {
         new Draw($(this).parents('.service-container')).price($(this));
       });
+      
+      $('.add_to_cart.package').live('click', function() {
+        $.getScript('')
+      });
+      
     });
+
 #calculator-page
   .left
     = render '/shared/content_page'
@@ -149,20 +155,35 @@
               = label_tag "service_#{service.id}_offers", "Услуги"
               %select.offers{ :id => "service_#{service.id}_offers" }
             .properties-container{ :style => "display:none;" }
-            .price{ :style => 'display:none;' }
+            .price.property{ :style => 'display:none;' }
               Сумма:
               %span.price_holder 0.00
               грн.
-            .add_to_cart.button{ :style => 'display:none;' } Заказать
+            .add_to_cart.properties.button{ :style => 'display:none;' } Заказать
             .clearfix
+            %br
+            %br
+            .packages-container
+              - service.service_packages.each do |package|
+                .package
+                  %h4= package.title
+                  =raw package.content
+                  .price.package
+                    %span.price_holder= package.price
+                    грн.
+                  = form_for :item, :url => '/cart', :remote => true, :html => {:'data-type' => :script} do |f|
+                    = f.hidden_field :type, :value => 'package'
+                    = f.hidden_field :id, :value => package.id
+                    = f.submit 'Заказать', :class => 'add_to_cart package button'
+                .clearfix
+                %br
         .spoiler
           .arrow
           .clearfix
   .right
     #cart
       .title Корзина рекламодателя
-      .items 
-        Корзина пуста
+      .items= cart_items
       .order-total-price
       
   .clearfix

@@ -34,13 +34,17 @@ Kapitan::Application.routes.draw do
     resources :offer_groups, :only => [:show], :controller => 'service/offer_groups'
   end
 
+  resources :cart, :only => [:create, :destroy]
+
   get :calculator, :to => "calculator#index"
   get 'calculator/offers', :to => "calculator#offers"
   get 'calculator/properties', :to => "calculator#properties"
 
-  get 'admin/news_items/parse_news', :to => "admin/news_items#parse_news"
-  
+
+
   scope :path => 'refinery', :as => 'admin', :module => 'admin' do
+    get 'news_items/parse_news', :to => "news_items#parse_news"
+
     resources :ads, :except => :show do
       post :update_positions, :on => :collection
     end
@@ -59,7 +63,9 @@ Kapitan::Application.routes.draw do
     resources :services, :except => :show do
       post :update_positions, :on => :collection
     end
+    resources :service_packages, :except => :show do
+      post :update_positions, :on => :collection
+    end
   end
-
 
 end

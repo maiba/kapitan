@@ -1,0 +1,7 @@
+%li.clearfix.record{ :class => cycle("on", "on-hover"), :id => dom_id(service_package) }
+  %span.title
+    = service_package.title
+    %span.preview &nbsp;
+  %span.actions
+    = link_to refinery_icon_tag("application_edit.png"), [:edit, :admin, service_package], :title => t('.edit')
+    = link_to refinery_icon_tag("delete.png"), [:admin, service_package], :class => "cancel confirm-delete", :title => t('.delete'), :confirm => t('message', :scope => 'shared.admin.delete', :title => service_package.title), :method => :delete

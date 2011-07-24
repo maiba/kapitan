@@ -15,7 +15,7 @@
   .field
     = f.label :offer_groups
     - Offer::Group.all.each do |offer_group|
-      %div
+      %div{:style => "float:left;width:30%;"}
         = check_box_tag "service[offer_group_ids][]", offer_group.id, @service.offer_groups.include?(offer_group),:id => "service_offer_group_id_#{offer_group.id}"
         = label_tag "service_offer_group_id_#{offer_group.id}", offer_group.title, :class => "stripped"
   .field
