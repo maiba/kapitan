@@ -1,4 +1,7 @@
+set :output, {:standard => '/log/cron.log'}
+job_type :rake_bundle,    "cd /var/lib/gems/1.8/bin && RAILS_ENV=:environment bundle exec rake :task :output"
+
 every 1.day do
-  /var/lib/gems/1.8/bin/bundle rake "parse:news"
+   rake_bundle "parse:news"
 end
 
