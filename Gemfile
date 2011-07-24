@@ -9,7 +9,7 @@ gem 'russian'
 gem "crummy", ">= 1.0.1"
 gem 'paperclip'
 gem 'meta_search'
-gem 'meta_where'
+# gem 'meta_where'
 gem 'nokogiri'
 gem 'whenever'
 gem 'cocoon'
