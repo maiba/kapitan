@@ -11,6 +11,8 @@ class Service < ActiveRecord::Base
   belongs_to :photo, :class_name => '::Image'
   belongs_to :price, :class_name => '::Resource'
 
+  has_many :service_packages, :class_name => "::Service::Package", :foreign_key => "service_id"
+
   has_and_belongs_to_many :offer_groups,
                           :class_name => '::Offer::Group',
                           :join_table => "offer_groups_services",

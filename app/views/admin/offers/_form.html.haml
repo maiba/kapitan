@@ -27,6 +27,13 @@
     = f.label :photo
     = render "/shared/admin/image_picker", :f => f, :field => :photo_id, :image => @offer.photo, :toggle_image_display => false
   .field
+    = f.label :quantity
+    = f.text_field :quantity, :class => 'larger widest'
+  .field
+    = f.label :suffix
+    = f.text_field :suffix, :class => 'larger widest'
+
+  .field
     = f.label :offer_groups
     - Offer::Group.order(:title).all.each do |offer_group|
       %div{:style => "float:left;width:30%;"}

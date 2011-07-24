@@ -1687,7 +1687,7 @@ table.border, table.border td {border: 1px solid black;}
 	margin-left: -4px;
 }
 
-#cart .title {
+#cart > .title {
 	font-size: 16px;
 	color: #ffffff;
 	background: #874487 url(/images/icon-cart-16.png) no-repeat 15px;
@@ -1697,6 +1697,28 @@ table.border, table.border td {border: 1px solid black;}
 #cart .items {
 	background-color: rgba(255,255,255,0.5);
 	padding: 10px;
+}
+
+#cart .items .item {
+	margin-bottom: 7px;
+	margin-top: 7px;
+}
+
+#cart .items .item .price {
+	float: right;
+	margin-right: 10px;
+}
+
+#cart .items .item a.delete {
+	float: right;
+	width: 11px;
+	height: 11px;
+	background: url(/images/icon-close-11.png) no-repeat 0 0;
+	margin-top: 2px;
+}
+
+#cart .items .item a.delete:hover{
+	background-position: 0 -11px;
 }
 
 

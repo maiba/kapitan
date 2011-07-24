@@ -1,0 +1,33 @@
+= form_for [:admin, @service_package] do |f|
+  = render "/shared/admin/error_messages", :object => @service_package, :include_object_name => true
+
+  .field
+    = f.label :title
+    = f.text_field :title, :class => 'larger widest'
+  
+  .field
+    = f.label :price
+    = f.text_field :price
+  
+  .field
+    = f.label :service
+    = f.select :service_id, Service.all.map{|s| [s.title, s.id] }, :include_blank => t('.chose_service')
+
+  .field
+    #page-tabs.clearfix.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
+      %ul#page_parts
+        - [:content].each_with_index do |part, part_index|
+          %li.ui-state-default{ :class => ('ui-state-active' if part_index == 0) }
+            = link_to part.to_s.titleize, "##{part}"
+
+      #page_part_editors
+        - [:content].each do |part|
+          .page_part{ :id => part }= f.text_area part, :rows => 20, :class => 'wymeditor widest'
+  
+  = render "/shared/admin/form_actions", :f => f, :continue_editing => false, :delete_title => t('delete', :scope => 'admin.packages.package'), :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @service_package.title)
+
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });

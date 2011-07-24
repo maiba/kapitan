@@ -1,12 +1,14 @@
 class CalculatorController < ApplicationController
 
+  before_filter :skip_bottom
+
   def index
     @page = Page.find_by_link_url("/calculator")
     add_crumb @page.title, calculator_path
   end
 
   def offers
-    render :json => Offer::Group.find(params[:id]).offers.to_json(:only => [ :id, :title ])
+    render :json => Offer::Group.find(params[:id]).offers.to_json(:only => [ :id, :title, :quantity, :suffix ])
   end
 
   def properties

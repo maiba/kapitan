@@ -2,7 +2,8 @@
 - content_for :title, @page.title
 - content_for :javascripts do
   :javascript
-    $(document).ready(function() {
+    $(document).ready(function(){
+      $('#cart').scrollfollow();
       
       $('.spoiler').click(function() {
         var spoiler = $(this),
@@ -31,7 +32,7 @@
         
         this.properties = function() {
           service.find('.properties-container').slideUp();
-          service.find('.price').slideUp();
+          service.find('.price.property').slideUp();
         };
       };
       
@@ -40,9 +41,10 @@
             offers_container = scope.find('.offers-container'),
             offers_select = scope.find('select.offers'),
             properties_container = scope.find('.properties-container'),
-            price = scope.find('.price'),
-            price_holder = scope.find('.price_holder'),
-            add_to_cart_button = scope.find('.add_to_cart'),
+            properties_selects = properties_container.find('select.property'),
+            price = scope.find('.price.property'),
+            price_holder = price.find('.price_holder'),
+            add_to_cart_button = scope.find('.add_to_cart.properties'),
             reset = new Reset(scope);        
         
         this.offers = function(){
@@ -55,7 +57,7 @@
               var offers_options = '<option value="">Выберите услугу</option>';
               for (var i=0; i < offers.length; i++) {
                 var offer = offers[i];
-                offers_options += '<option value="'+offer.id+'">'+offer.title+'</option>';
+                offers_options += '<option value="'+offer.id+'" data-quantity="'+offer.quantity+'" data-suffix="'+offer.suffix+'">'+offer.title+'</option>';
               };
               offers_container.stop(true,true).slideDown();
               offers_select.html(offers_options);
@@ -78,15 +80,25 @@
                 properties_html += ' \
                   <div class="field"> \
                     <label for="property_'+property.id+'">'+property.title+'</label> \
-                    <select id="property_'+property.id+'" class="property"> \
+                    <select id="property_'+property.id+'" class="property" data-id="'+property.id+'"> \
                       <option value="">Выберите</option> \
                 ';
                 for (var ii=0; ii < property.offer_property_options.length; ii++) {
                   var option = property.offer_property_options[ii];
-                  properties_html += '<option value="'+option.price+'">'+option.title+'</option>';
-                };
+                  properties_html += '<option value="'+option.price+'" data-id="'+option.id+'">'+option.title+'</option>';
+                };                
                 properties_html += '</select></div>';
               };
+              var quantity = offers_select.find('option:selected').data('quantity'),
+                  suffix = offers_select.find('option:selected').data('suffix');
+              
+              properties_html += '\
+                <div> \
+                  <input type="text" class="offer-quantity" value="'+quantity+'" id="offer_'+offers_select.val()+'_quantity"/> \
+                  за \
+                  <label for="offer_'+offers_select.val()+'_quantity">'+suffix+'</label> \
+                </div> \
+              ';
               properties_container.html(properties_html).stop(true,true).slideDown();
               price.stop(true,true).slideDown();
               price_holder.html('0.00');
@@ -109,13 +121,32 @@
               not_all_selected = true;
             }
           });
+          var offer_quantity = offers_select.find('option:selected').data('quantity'),
+              quantity = scope.find('.offer-quantity').val();
+          total_price = ( total_price * ( parseInt(quantity, 10) / parseInt(offer_quantity, 10) ) ).toFixed(2);
           price_holder.html(total_price);
           if (not_all_selected){
             if (add_to_cart_button.is(':visible'))
-              add_to_cart_button.hide('slide');
+              add_to_cart_button.hide('slide').unbind();
           } else {
             if (add_to_cart_button.is(':hidden'))
-              add_to_cart_button.show('slide');
+              add_to_cart_button.show('slide').bind('click',function() {
+                var offer = {
+                  id: offers_select.val(),
+                  type: 'offer',
+                  quantity: scope.find('.offer-quantity').val(),
+                  properties: {}
+                }
+                properties_selects.each(function() {
+                  offer.properties[$(this).data('id')] = $(this).find('option:selected').data('id');
+                });
+                $.ajax({
+                  url: "#{cart_index_path}",
+                  type: "POST",
+                  dataType: "script",
+                  data: { item: offer }
+                });
+              });
           }
         };
       }
@@ -126,10 +157,12 @@
       $('select.offers').live('change', function(){
         new Draw($(this).parents('.service-container')).properties();
       });
-      $('select.property').live('change', function() {
+      $('select.property, .offer-quantity').live('change', function() {
         new Draw($(this).parents('.service-container')).price($(this));
       });
+            
     });
+
 #calculator-page
   .left
     = render '/shared/content_page'
@@ -149,20 +182,35 @@
               = label_tag "service_#{service.id}_offers", "Услуги"
               %select.offers{ :id => "service_#{service.id}_offers" }
             .properties-container{ :style => "display:none;" }
-            .price{ :style => 'display:none;' }
+            .price.property{ :style => 'display:none;' }
               Сумма:
               %span.price_holder 0.00
               грн.
-            .add_to_cart.button{ :style => 'display:none;' } Заказать
+            .add_to_cart.properties.button{ :style => 'display:none;' } Заказать
             .clearfix
+            %br
+            %br
+            .packages-container
+              - service.service_packages.each do |package|
+                .package
+                  %h4= package.title
+                  =raw package.content
+                  .price.package
+                    %span.price_holder= package.price
+                    грн.
+                  = form_for :item, :url => '/cart', :remote => true, :html => {:'data-type' => :script} do |f|
+                    = f.hidden_field :type, :value => 'package'
+                    = f.hidden_field :id, :value => package.id
+                    = f.submit 'Заказать', :class => 'add_to_cart package button'
+                .clearfix
+                %br
         .spoiler
           .arrow
           .clearfix
   .right
     #cart
       .title Корзина рекламодателя
-      .items 
-        Корзина пуста
+      .items= cart_items
       .order-total-price
       
   .clearfix

@@ -1,0 +1,8 @@
+%ul
+  - if Admin::ServicePackagesController.searchable?
+    %li= render "/shared/admin/search", :url => [:admin, :service_packages]
+  %li= link_to t('.create_new'), [:new, :admin, :service_package], :class => "add_icon"
+  - if !searching? && Admin::ServicePackagesController.sortable? && Service::Package.count > 1
+    %li
+      = link_to t('.reorder', :what => "Packages"), [:admin, :service_packages], :id => "reorder_action", :class => "reorder_icon"
+      = link_to t('.reorder_done', :what => "Packages"), [:admin, :service_packages], :id => "reorder_action_done", :style => "display: none;", :class => "reorder_icon"

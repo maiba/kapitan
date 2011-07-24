@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://gems.github.org'
 
 gem 'rails', '3.0.9'
 gem 'sqlite3'
@@ -12,7 +12,7 @@ gem 'meta_search'
 gem 'meta_where'
 gem 'nokogiri'
 gem 'whenever'
-gem 'cocoon'
+gem 'cocoon', '1.0.10'
 
 group :development, :test do
   gem 'hirb'

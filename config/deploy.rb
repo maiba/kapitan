@@ -1,3 +1,5 @@
+# require "whenever/capistrano"
+
 set :application, "kapitan"
 set :repository,  "git://github.com/gagarin-in-ua/kapitan.git"
 set :db_file, "kapitan.sqlite3"
@@ -14,9 +16,8 @@ set :rails_env, "production"
 set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
 set :unicorn_conf, "/etc/unicorn/#{application}.#{account}.rb"
 set :unicorn_pid, "/var/run/unicorn/#{application}.#{account}.pid"
-
 set :whenever_command, "#{bundle} exec whenever"
-require "whenever/capistrano"
+
 
 role :web, "lithium.locum.ru"
 role :app, "lithium.locum.ru"
@@ -56,14 +57,16 @@ namespace :deploy do
     run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -s #{shared_path}/db/#{db_file} #{release_path}/db/#{db_file}"
   end
+end
 
+namespace :crontab do
   desc "Clear the crontab file"
-  task :clear_crontab, :roles => :db do
+  task :clear, :roles => :db do
       run "cd #{current} && #{whenever_command} --clear-crontab #{application}"
   end
 
   desc "Update the crontab file"
-  task :update_crontab, :roles => :db do
+  task :update, :roles => :db do
       run "cd #{current} && #{whenever_command} --update-crontab #{application}"
   end
 end
@@ -84,5 +87,5 @@ after "deploy:update_code", "dragonfly:symlink"
 after "deploy:update_code", "deploy:copy_configs"
 after "deploy:copy_configs", "bundler:install"
 after "bundler:install", "deploy:migrate"
-after "deploy:migrate", "deploy:clear_crontab"
-after "deploy:clear_crontab", "deploy:update_crontab"
+after "bundler:install", "crontab:clear"
+after "crontab:clear", "crontab:update"
