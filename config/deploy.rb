@@ -15,6 +15,9 @@ set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
 set :unicorn_conf, "/etc/unicorn/#{application}.#{account}.rb"
 set :unicorn_pid, "/var/run/unicorn/#{application}.#{account}.pid"
 
+set :whenever_command, "#{bundle} exec whenever"
+require "whenever/capistrano"
+
 role :web, "lithium.locum.ru"
 role :app, "lithium.locum.ru"
 role :db,  "lithium.locum.ru", :primary => true
@@ -54,9 +57,14 @@ namespace :deploy do
     run "ln -s #{shared_path}/db/#{db_file} #{release_path}/db/#{db_file}"
   end
 
+  desc "Clear the crontab file"
+  task :clear_crontab, :roles => :db do
+      run "cd #{current} && #{whenever_command} --clear-crontab #{application}"
+  end
+
   desc "Update the crontab file"
   task :update_crontab, :roles => :db do
-      run "cd #{current} && #{bundle} exec whenever --update-crontab #{application}"
+      run "cd #{current} && #{whenever_command} --update-crontab #{application}"
   end
 end
 
@@ -76,4 +84,5 @@ after "deploy:update_code", "dragonfly:symlink"
 after "deploy:update_code", "deploy:copy_configs"
 after "deploy:copy_configs", "bundler:install"
 after "bundler:install", "deploy:migrate"
-after "deploy:migrate", "deploy:update_crontab"
+after "deploy:migrate", "deploy:clear_crontab"
+after "deploy:clear_crontab", "deploy:update_crontab"
