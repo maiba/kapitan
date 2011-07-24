@@ -1,4 +1,4 @@
-require "whenever/capistrano"
+# require "whenever/capistrano"
 
 set :application, "kapitan"
 set :repository,  "git://github.com/gagarin-in-ua/kapitan.git"
@@ -87,5 +87,5 @@ after "deploy:update_code", "dragonfly:symlink"
 after "deploy:update_code", "deploy:copy_configs"
 after "deploy:copy_configs", "bundler:install"
 after "bundler:install", "deploy:migrate"
-after "deploy:migrate", "crontab:clear"
+after "bundler:install", "crontab:clear"
 after "crontab:clear", "crontab:update"
