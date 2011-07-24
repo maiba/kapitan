@@ -21,8 +21,8 @@ class Cart
     delete(item) if in_cart?(item)
     if item[:type] == 'package'
       @session[:cart] << { :id => item[:id].to_i, :type => item[:type] }
-    elsif item[:type] == 'properties'
-      @session[:cart] << { :id => item[:id], :type => item[:type], :count => item[:count].to_i, :properties => item[:properties] }
+    elsif item[:type] == 'offer'
+      @session[:cart] << { :id => item[:id], :type => item[:type], :quantity => item[:quantity].to_i, :properties => item[:properties] }
     end
     true
   end
@@ -34,7 +34,28 @@ class Cart
 
   def item_price(item)
     if item[:type] == 'package'
-      Service::Package.find(item[:id]).price
+      Service::Package.find(item[:id]).price.to_f
+    elsif item[:type] == 'offer'
+      offer = Offer.find(item[:id])
+      offer_price = 0.0
+      item[:properties].each do |key, value|
+        offer_price += offer.offer_properties.find(key.to_i).offer_property_options.find(value.to_i).price.to_f
+      end
+      (offer_price * (item[:quantity].to_f / offer.quantity.to_f).to_f).to_f
+    end
+  end
+
+  def item_title(item)
+    if item[:type] == 'package'
+      Service::Package.find(item[:id]).title
+    elsif item[:type] == 'offer'
+      Offer.find(item[:id]).title
+    end
+  end
+
+  def total_price
+    items.inject(0.0) do |result, item|
+      result + item_price(item)
     end
   end
 
@@ -64,10 +85,11 @@ private
 
     if item[:type] == 'package'
       @errors << I18n.t('package_not_found', :scope => i18n_scope) unless Service::Package.exists?(item[:id].to_s)
-    elsif item[:type] == 'properties'
-      @errors << I18.t('item_must_have_count', :scope => i18n_scope) unless item[:count] && item[:count] > 0
+    elsif item[:type] == 'offer'
+      @errors << I18n.t('item_must_have_quantity', :scope => i18n_scope) unless item[:quantity] && item[:quantity].to_i > 0
+      @errors << I18n.t('item_must_have_properties', :scope => i18n_scope) unless item[:properties] && item[:properties].any?
     else
-      @errors << I18.t('item_must_have_type', :scope => i18n_scope)
+      @errors << I18n.t('item_must_have_type', :scope => i18n_scope)
     end
 
     # unless item[:count] || form[:count].blank?

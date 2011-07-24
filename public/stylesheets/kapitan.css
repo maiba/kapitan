@@ -1700,8 +1700,8 @@ table.border, table.border td {border: 1px solid black;}
 }
 
 #cart .items .item {
-	margin-bottom: 3px;
-	margin-top: 3px;
+	margin-bottom: 7px;
+	margin-top: 7px;
 }
 
 #cart .items .item .price {
