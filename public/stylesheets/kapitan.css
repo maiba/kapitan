@@ -1627,6 +1627,7 @@ table.border, table.border td {border: 1px solid black;}
 #calculator .service-title {
 	color: #24299b;
 	cursor: pointer;
+	font-size: 18px;
 }
 
 #calculator .spoiler {
@@ -1687,6 +1688,13 @@ table.border, table.border td {border: 1px solid black;}
 	margin-left: -4px;
 }
 
+#calculator div.package {
+	border-top: 1px solid #874487;
+	margin-left: -15px;
+	padding: 5px 15px;
+	margin-right: -15px;
+}
+
 #cart > .title {
 	font-size: 16px;
 	color: #ffffff;
@@ -1694,19 +1702,29 @@ table.border, table.border td {border: 1px solid black;}
 	padding: 0.5em 15px 0.5em 40px;
 }
 
-#cart .items {
-	background-color: rgba(255,255,255,0.5);
+#cart h4{
+		background-color: rgba(255,255,255,0.5);
+	padding: 10px 10px 5px;
+	margin-bottom: 0;
+}
+
+#cart .item {
+		background-color: rgba(255,255,255,0.5);
 	padding: 10px;
 }
 
-#cart .items .item {
-	margin-bottom: 7px;
-	margin-top: 7px;
-}
-
-#cart .items .item .price {
+#cart .price {
 	float: right;
 	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#cart .cart-price {
+	padding: 10px;
+	color: #874487;
+	font-weight: bold;
+	margin-top: 5px;
+	background-color: rgba(255,255,255,0.5);
 }
 
 #cart .items .item a.delete {
@@ -1719,6 +1737,25 @@ table.border, table.border td {border: 1px solid black;}
 
 #cart .items .item a.delete:hover{
 	background-position: 0 -11px;
+}
+
+#cart .order-button {
+	display: block;
+	background: url(/images/button-left-menu.png) no-repeat 0 0;
+	width: 210px;
+	height: 58px;
+	text-align: center;
+	font: 14px/58px Georgia, "Times New Roman", Times, serif;
+	color: #f4e9fa;
+	text-decoration: none;
+	margin-right: auto;
+	margin-left: auto;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+#cart .order-button:hover {
+	background-position: 0 -58px;
 }
 
 

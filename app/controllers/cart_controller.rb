@@ -1,9 +1,6 @@
 class CartController < ApplicationController
 
   include CartHelper
-  include ActionView::Helpers::CaptureHelper
-  include ActionView::Helpers::TagHelper
-
 
   def create
     if cart.add(params[:item])
@@ -29,6 +26,7 @@ class CartController < ApplicationController
         $.growl.notice('Товар удален');
         $("#cart .item[data-id='#{params[:id]}'][data-type='#{params[:type]}']").slideUp(300,function(){
           $(this).remove();
+          $("#cart .total-price").html("#{price_formatter cart.total_price}");
         });
       SCRIPT
     end

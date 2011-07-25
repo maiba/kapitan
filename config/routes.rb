@@ -7,9 +7,9 @@ Kapitan::Application.routes.draw do
       :sign_up => 'registration'
     },
     :controllers => {
-      :sessions => "accounts/sessions",
-      :registrations => "accounts/registrations",
-      :passwords => "accounts/passwords"
+      :sessions => 'accounts/sessions',
+      :registrations => 'accounts/registrations',
+      :passwords => 'accounts/passwords'
     }
 
   resources :account_attachments
@@ -19,7 +19,7 @@ Kapitan::Application.routes.draw do
   end
 
   namespace :cabinet do
-    root :to => "home#index"
+    root :to => 'home#index'
   end
 
   resources :ads, :only => [:index, :show] do
@@ -36,14 +36,14 @@ Kapitan::Application.routes.draw do
 
   resources :cart, :only => [:create, :destroy]
 
-  get :calculator, :to => "calculator#index"
-  get 'calculator/offers', :to => "calculator#offers"
-  get 'calculator/properties', :to => "calculator#properties"
+  get :calculator, :to => 'calculator#index'
+  get 'calculator/offers', :to => 'calculator#offers'
+  get 'calculator/properties', :to => 'calculator#properties'
 
-
+  resource :order, :controller => 'order'
 
   scope :path => 'refinery', :as => 'admin', :module => 'admin' do
-    get 'news_items/parse_news', :to => "news_items#parse_news"
+    get 'news_items/parse_news', :to => 'news_items#parse_news'
 
     resources :ads, :except => :show do
       post :update_positions, :on => :collection

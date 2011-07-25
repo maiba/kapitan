@@ -41,7 +41,7 @@ class Cart
       item[:properties].each do |key, value|
         offer_price += offer.offer_properties.find(key.to_i).offer_property_options.find(value.to_i).price.to_f
       end
-      (offer_price * (item[:quantity].to_f / offer.quantity.to_f).to_f).to_f
+      (offer_price * (item[:quantity].to_f / offer.quantity.to_f).to_f)
     end
   end
 
