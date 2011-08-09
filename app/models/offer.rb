@@ -2,8 +2,6 @@ class Offer < ActiveRecord::Base
 
   acts_as_indexed :fields => [:title]
 
-  validates :title, :presence => true
-
   belongs_to :photo, :class_name => '::Image'
 
   has_many :offer_properties,
@@ -17,5 +15,9 @@ class Offer < ActiveRecord::Base
                           :association_foreign_key => 'offer_group_id'
 
   accepts_nested_attributes_for :offer_properties, :allow_destroy => true
+
+  validates :title, :presence => true
+  validates :suffix, :presence => true
+  validates :quantity, :presence => true
 
 end

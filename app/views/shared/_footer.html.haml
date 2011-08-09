@@ -5,21 +5,18 @@
       %li
         %h5 Разработка
         %ul
-          %li нейминг, разработка названия
-          %li позиционирование
-          %li создание бренда
-          %li разработка логотипа
-          %li разработка фирменного стиля
-          %li разработка торговой марки
-      %li
-        %h5 Продвижение
-        %ul
-          %li бренд-консалтинг
-          %li креатив, идеи продвижения
-          %li стратегия продвижения
-          %li комплексное продвижение бренда
-          %li выведение товаров/услуг на рынок
-          %li формирование каналов коммуникаций
+          %li= link_to "нейминг, разработка названия", "http://www.sunday.com.ua/services/branding.html", :target => "_blank"
+          %li= link_to "позиционирование", "http://www.sunday.com.ua/services/branding.html", :target => "_blank"
+          %li= link_to "создание бренда", "http://www.sunday.com.ua/services/branding.html", :target => "_blank"
+          %li= link_to "разработка логотипа", "http://www.sunday.com.ua/services/logo-style.html", :target => "_blank"
+          %li= link_to "разработка фирменного стиля", "http://www.sunday.com.ua/services/logo-style.html", :target => "_blank"
+          %li= link_to "разработка торговой марки", "http://www.sunday.com.ua/services/branding.html", :target => "_blank"
+          %li= link_to "дизайн упаковки, этикетки", "http://www.sunday.com.ua/services/design_pack.html", :target => "_blank"
+          %li= link_to "дизайн каталогов, буклетов", "http://www.sunday.com.ua/services/design_polygraphy.html", :target => "_blank"
+          %li= link_to "дизайн календарей", "http://www.sunday.com.ua/services/design_polygraphy.html", :target => "_blank"
+          %li= link_to "дизайн полиграфии", "http://www.sunday.com.ua/services/design_polygraphy.html", :target => "_blank"
+          %li= link_to "web-дизайн, разработка сайта", "http://www.sunday.com.ua/services/site.html", :target => "_blank"
+          %li= link_to "рекламный дизайн", "http://www.sunday.com.ua/services/reklama.html", :target => "_blank"
       %li
         %h5 Размещение
         %ul
@@ -28,6 +25,17 @@
           %li реклама на радио
           %li реклама в метро
           %li наружная реклама
+          %li полиграфия
+          %li сувенирная продукция
+      %li
+        %h5 Продвижение
+        %ul
+          %li= link_to "бренд-консалтинг", "", :target => "_blank"
+          %li= link_to "креатив, идеи продвижения", "", :target => "_blank"
+          %li= link_to "стратегия продвижения", "", :target => "_blank"
+          %li= link_to "комплексное продвижение бренда", "", :target => "_blank"
+          %li= link_to "выведение товаров/услуг на рынок", "", :target => "_blank"
+          %li= link_to "формирование каналов коммуникаций", "", :target => "_blank"
       %li
         %h5 Продукция
         %ul
@@ -38,7 +46,7 @@
           %li корпоративные и деловые подарки
   .map
     %h3= link_to "Мы на карте", "#"
-    = link_to image_tag('map.png'), 'http://maps.google.com.ua/maps?f=q&source=s_q&hl=ru&geocode=&q=%D0%B3.%D0%A5%D0%B0%D1%80%D1%8C%D0%BA%D0%BE%D0%B2+%D0%BF%D0%BB.%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B,+8&sll=48.382803,31.17461&sspn=17.766957,46.538086&ie=UTF8&hq=&hnear=%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B+%D0%BF%D0%BB.,+8,+%D0%A5%D0%B0%D1%80%D1%8C%D0%BA%D0%BE%D0%B2,+%D0%A5%D0%B0%D1%80%D1%8C%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C&view=map&z=16', :target => '_blank'
+    = image_tag('map.png')
     %br
     %br
     %br

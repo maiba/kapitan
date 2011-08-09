@@ -62,12 +62,12 @@ end
 namespace :crontab do
   desc "Clear the crontab file"
   task :clear, :roles => :db do
-      run "cd #{current} && #{whenever_command} --clear-crontab #{application}"
+    run "cd #{current} && #{whenever_command} --clear-crontab #{application}"
   end
 
   desc "Update the crontab file"
   task :update, :roles => :db do
-      run "cd #{current} && #{whenever_command} --update-crontab #{application}"
+    run "cd #{current} && #{whenever_command} --update-crontab #{application}"
   end
 end
 
@@ -87,5 +87,5 @@ after "deploy:update_code", "dragonfly:symlink"
 after "deploy:update_code", "deploy:copy_configs"
 after "deploy:copy_configs", "bundler:install"
 after "bundler:install", "deploy:migrate"
-after "bundler:install", "crontab:clear"
+after "deploy:migrate", "crontab:clear"
 after "crontab:clear", "crontab:update"
