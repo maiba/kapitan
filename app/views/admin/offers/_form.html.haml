@@ -20,15 +20,19 @@
 
 = form_for [:admin, @offer] do |f|
   = render "/shared/admin/error_messages", :object => @offer, :include_object_name => true
+
   .field
     = f.label :title
     = f.text_field :title, :class => 'larger widest'
+
   .field
     = f.label :photo
     = render "/shared/admin/image_picker", :f => f, :field => :photo_id, :image => @offer.photo, :toggle_image_display => false
+
   .field
     = f.label :quantity
     = f.text_field :quantity, :class => 'larger widest'
+
   .field
     = f.label :suffix
     = f.text_field :suffix, :class => 'larger widest'

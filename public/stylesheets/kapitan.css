@@ -538,7 +538,7 @@ body {
 }
 
 #main {
-	padding-bottom: 400px;
+	padding-bottom: 500px;
 	background-color: transparent;
 }
 
@@ -1201,10 +1201,10 @@ legend {
 /* @group footer */
 
 #footer {
-	height: 300px;
+	height: 400px;
 	min-width: 1000px;
 	width: 100%;
-	margin-top: -400px;
+	margin-top: -500px;
 	overflow: hidden;
 	clear: both;
 	display: block;
@@ -1243,6 +1243,7 @@ legend {
 	width: 50%;
 	float: left;
 	margin-bottom: 15px;
+	height: 185px;
 }
 
 #footer .service > ul > li > ul {
@@ -1260,6 +1261,11 @@ legend {
 #footer .map {
 	float: left;
 	width: 25%;
+	
+}
+
+#footer .map img {
+	border: 1px solid #d5cfe3;
 }
 
 #footer .contacts {

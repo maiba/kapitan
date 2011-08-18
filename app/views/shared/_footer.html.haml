@@ -5,18 +5,18 @@
       %li
         %h5 Разработка
         %ul
-          %li= link_to "нейминг, разработка названия", "http://www.sunday.com.ua/services/branding.html", :target => "_blank"
-          %li= link_to "позиционирование", "http://www.sunday.com.ua/services/branding.html", :target => "_blank"
-          %li= link_to "создание бренда", "http://www.sunday.com.ua/services/branding.html", :target => "_blank"
-          %li= link_to "разработка логотипа", "http://www.sunday.com.ua/services/logo-style.html", :target => "_blank"
-          %li= link_to "разработка фирменного стиля", "http://www.sunday.com.ua/services/logo-style.html", :target => "_blank"
-          %li= link_to "разработка торговой марки", "http://www.sunday.com.ua/services/branding.html", :target => "_blank"
-          %li= link_to "дизайн упаковки, этикетки", "http://www.sunday.com.ua/services/design_pack.html", :target => "_blank"
-          %li= link_to "дизайн каталогов, буклетов", "http://www.sunday.com.ua/services/design_polygraphy.html", :target => "_blank"
-          %li= link_to "дизайн календарей", "http://www.sunday.com.ua/services/design_polygraphy.html", :target => "_blank"
-          %li= link_to "дизайн полиграфии", "http://www.sunday.com.ua/services/design_polygraphy.html", :target => "_blank"
-          %li= link_to "web-дизайн, разработка сайта", "http://www.sunday.com.ua/services/site.html", :target => "_blank"
-          %li= link_to "рекламный дизайн", "http://www.sunday.com.ua/services/reklama.html", :target => "_blank"
+          %li нейминг, разработка названия
+          %li позиционирование
+          %li создание бренда
+          %li разработка логотипа
+          %li разработка фирменного стиля
+          %li разработка торговой марки
+          %li дизайн упаковки, этикетки
+          %li дизайн каталогов, буклетов
+          %li дизайн календарей
+          %li дизайн полиграфии
+          %li web-дизайн, разработка сайта
+          %li рекламный дизайн
       %li
         %h5 Размещение
         %ul
@@ -30,12 +30,12 @@
       %li
         %h5 Продвижение
         %ul
-          %li= link_to "бренд-консалтинг", "", :target => "_blank"
-          %li= link_to "креатив, идеи продвижения", "", :target => "_blank"
-          %li= link_to "стратегия продвижения", "", :target => "_blank"
-          %li= link_to "комплексное продвижение бренда", "", :target => "_blank"
-          %li= link_to "выведение товаров/услуг на рынок", "", :target => "_blank"
-          %li= link_to "формирование каналов коммуникаций", "", :target => "_blank"
+          %li бренд-консалтинг
+          %li креатив, идеи продвижения
+          %li стратегия продвижения
+          %li комплексное продвижение бренда
+          %li выведение товаров/услуг на рынок
+          %li формирование каналов коммуникаций
       %li
         %h5 Продукция
         %ul
@@ -45,8 +45,9 @@
           %li сувенирная продукция с логотипом
           %li корпоративные и деловые подарки
   .map
-    %h3= link_to "Мы на карте", "#"
-    = image_tag('map.png')
+    %h3 Мы на карте
+    = link_to image_tag('map.png'), Page.find(46).url
+    %br
     %br
     %br
     %br
@@ -62,6 +63,13 @@
     %br
     %br
     .copyright Copyright © Капитан, 2011
+    %br
+    %br
+    %br
+    %br
+    %br
+    %br
+    %br
     %br
     %br
     .social

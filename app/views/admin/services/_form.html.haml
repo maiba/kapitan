@@ -1,23 +1,29 @@
 = form_for [:admin, @service] do |f|
   = render "/shared/admin/error_messages", :object => @service, :include_object_name => true
+
   .field
     = f.label :title
     = f.text_field :title, :class => 'larger widest'
+
   .field
     = f.label :price
     = render "/shared/admin/resource_picker", :f => f, :field => :price_id, :resource => @service.price
+
   .field
     = f.label :photo
     = render "/shared/admin/image_picker", :f => f, :field => :photo_id, :image => @service.photo, :toggle_image_display => false
+
   .field
     = f.label :parent
     = f.select :parent_id, nested_set_options(Service, @service) {|i| "#{'-' * i.level} #{i.title}"}, :include_blank => true
+
   .field
     = f.label :offer_groups
     - Offer::Group.all.each do |offer_group|
       %div{:style => "float:left;width:30%;"}
         = check_box_tag "service[offer_group_ids][]", offer_group.id, @service.offer_groups.include?(offer_group),:id => "service_offer_group_id_#{offer_group.id}"
         = label_tag "service_offer_group_id_#{offer_group.id}", offer_group.title, :class => "stripped"
+
   .field
     #page-tabs.clearfix.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
       %ul#page_parts
