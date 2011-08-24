@@ -1,9 +1,9 @@
--"" content_for :title, @news_item.title
+- content_for :title, @news_item.title
 #news
   %h1= @news_item.title
   .content.white-pad
     =raw @news_item.content
-  -if @news_item.link
+  - if @news_item.link
     .content
       = "Источник"
-      = link_to @news_item.title, "http://www.proreklamu.com#{@news_item.link}"
+      = link_to @news_item.title, "http://www.proreklamu.com/#{@news_item.link}"
