@@ -4,8 +4,8 @@ class Offer < ActiveRecord::Base
 
   belongs_to :photo, :class_name => '::Image'
 
-  has_many :offer_properties,
-           :class_name => "::Offer::Property",
+  has_many :offer_types,
+           :class_name => "::Offer::Type",
            :foreign_key => 'offer_id'
 
   has_and_belongs_to_many :offer_groups,
@@ -14,7 +14,7 @@ class Offer < ActiveRecord::Base
                           :foreign_key => 'offer_id',
                           :association_foreign_key => 'offer_group_id'
 
-  accepts_nested_attributes_for :offer_properties, :allow_destroy => true
+  accepts_nested_attributes_for :offer_types, :allow_destroy => true
 
   validates :title, :presence => true
   validates :suffix, :presence => true

@@ -45,10 +45,10 @@
         = label_tag "offer_offer_group_id_#{offer_group.id}", offer_group.title, :class => "stripped"
     .clearfix
   .field
-    = f.label :offer_properties
-    = f.fields_for :offer_properties do |op_f|
-      = render 'offer_property_fields', :f => op_f
+    = f.label :offer_types
+    = f.fields_for :offer_types do |ot_f|
+      = render 'offer_type_fields', :f => ot_f
     .links
-      = link_to_add_association t('.add_property'), f, :offer_properties
+      = link_to_add_association t('.add_type'), f, :offer_types
 
   = render "/shared/admin/form_actions", :f => f, :continue_editing => false, :delete_title => t('delete', :scope => 'admin.offers.offer'), :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @offer.title)

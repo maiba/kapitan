@@ -75,7 +75,10 @@ ru:
         edit: Редактировать
         delete: Удалить
       form:
-        add_property: Добавить свойство        
+        add_type: Добавить тип   
+      offer_type_fields:
+        add_property: Добавить свойство
+        remove_type: Удалить тип  
       offer_property_fields:
         add_option: Добавить опцию
         remove_property: Удалить свойство
