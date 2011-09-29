@@ -26,15 +26,16 @@
                 offers_options += '<th>'+property.title+'</th>';
               };
               offers_options +='</tr>';
-               for (var i=0; i < properties.length; i++) {
-                  var property = properties[i];
-                  offers_options +='<tr>';
-                  for (var ii=0; ii < property.offer_property_options.length; ii++) {
-                    var option = property.offer_property_options[ii];
-                    offers_options += '<td> —'+option.title+'; </br>';
-                  };
-                  offers_options +='</td></tr>';
+              offers_options +='<tr>';
+              for (var i=0; i < properties.length; i++) {
+                var property = properties[i];
+                 
+                for (var ii=0; ii < property.offer_property_options.length; ii++) {
+                  var option = property.offer_property_options[ii];
+                  offers_options += '<td> —'+option.title+'; </br>';
                 };
+              offers_options +='</td></tr>';
+              };
               properties_container.html(offers_options);
               properties_container.stop(true,true).slideDown();
             });
