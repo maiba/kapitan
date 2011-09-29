@@ -1,3 +1,54 @@
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      function Reset(service){
+         this.properties = function() {
+            service.find('.properties_container').slideUp();
+        };
+      };
+      
+      function Draw(scope){
+        var offers_types_select = scope.find('select.offer-types'),
+            properties_container = scope.find('.properties-container'),  
+            reset = new Reset(scope);   
+        
+        this.properties = function(){
+          if (offers_types_select.val() != ''){
+            $.getJSON("#{service_offer_groups_properties_path}", { id: offers_types_select.val() }, function(properties){
+              if (!properties || properties.length == 0){
+                reset.properties();
+                return false;
+              }
+              var offers_options = '<table class="offer-props">';
+              offers_options +='<tr>';
+              for (var i=0; i < properties.length; i++) {
+                var property = properties[i];
+                offers_options += '<th>'+property.title+'</th>';
+              };
+              offers_options +='</tr>';
+               for (var i=0; i < properties.length; i++) {
+                  var property = properties[i];
+                  offers_options +='<tr>';
+                  for (var ii=0; ii < property.offer_property_options.length; ii++) {
+                    var option = property.offer_property_options[ii];
+                    offers_options += '<td> —'+option.title+'; </br>';
+                  };
+                  offers_options +='</td></tr>';
+                };
+              properties_container.html(offers_options);
+              properties_container.stop(true,true).slideDown();
+            });
+          } else {
+            reset.properties();
+          }
+        };
+      }
+      
+      $('select.offer-types').live('change', function(){
+        new Draw($(this).parents('.offer-container')).properties();
+      });
+     });
+
 - content_for :title, @offer_group.title
 - content_for :body_content_title, @offer_group.title
 
@@ -8,3 +59,17 @@
     = image_fu @offer_group.photo, '320x140>', :class => 'partner-image', :style => 'float:right;margin-left:15px;'
     = raw @offer_group.content
     .clearfix
+    
+
+- if @offer_group.offers.any?
+  - @offer_group.offers.each do |offer|
+    %div{:id=>"#offer-#{offer.id}"}
+      .content.white-pad
+        .offer-container
+          %h1= offer.title
+          %select.offer-types{:id => "offer-type-#{offer.id}", :'data-id' => offer.id }
+            %option{ :value => '' } Выберите Тип
+            - offer.offer_types.each do |type|
+              %option{ :value => type.id }= type.title
+          .properties-container{ :style => "display:none;" }
+        .envelope

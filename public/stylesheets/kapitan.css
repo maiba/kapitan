@@ -1397,6 +1397,25 @@ legend {
 }
 
 
+table.offer-props {
+	border-spacing: 0px;
+	background-color: white;
+	margin: 15px;
+	border: white;
+}
+table.offer-props th {
+	padding: 10px;
+	background-color: #ccc;
+	-moz-border-radius: ;
+	border: 1px inset white;
+	color: #fffeff;
+}
+table.offer-props td {
+	padding: 10px;
+	background-color: white;
+	-moz-border-radius: ;
+	border: 1px inset white;
+}
 
 /* @end */
 

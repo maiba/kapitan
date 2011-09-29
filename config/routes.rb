@@ -32,6 +32,7 @@ Kapitan::Application.routes.draw do
 
   resources :services, :only => [:index, :show] do
     resources :offer_groups, :only => [:show], :controller => 'service/offer_groups'
+    
   end
 
   resources :cart, :only => [:create, :destroy]
@@ -39,6 +40,7 @@ Kapitan::Application.routes.draw do
   get :calculator, :to => 'calculator#index'
   get 'calculator/offers', :to => 'calculator#offers'
   get 'calculator/properties', :to => 'calculator#properties'
+  get 'service/offer_groups/properties', :to => 'service/offer_groups#properties'
 
   resource :order, :controller => 'order'
 
