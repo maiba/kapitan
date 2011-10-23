@@ -39,8 +39,10 @@ Kapitan::Application.routes.draw do
 
   get :calculator, :to => 'calculator#index'
   get 'calculator/offers', :to => 'calculator#offers'
+  get 'calculator/types', :to => 'calculator#types'
   get 'calculator/properties', :to => 'calculator#properties'
   get 'service/offer_groups/properties', :to => 'service/offer_groups#properties'
+  get 'service/offer_groups/type', :to => 'service/offer_groups#type'
 
   resource :order, :controller => 'order'
 

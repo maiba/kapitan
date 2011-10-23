@@ -1,6 +1,6 @@
-source 'https://gems.github.org'
+source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.0.10 '
 gem 'sqlite3'
 gem 'unicorn'
 gem 'capistrano'
@@ -19,7 +19,7 @@ group :development, :test do
   gem 'thin'
 end
 
-gem 'refinerycms',              '0.9.9.21'
+gem 'refinerycms',              '= 1.0.8'
 gem 'refinerycms-search',       '~> 0.9.8'
-gem 'refinerycms-i18n',         '0.9.9.14'
+gem 'refinerycms-i18n', '~> 1.0.0'
 gem 'refinerycms-inquiries',    '~> 0.9.9.9',   :path => 'vendor/engines'

@@ -4,22 +4,37 @@
       function Reset(service){
          this.properties = function() {
             service.find('.properties_container').slideUp();
+            service.find('.type_container').slideUp();
         };
       };
       
       function Draw(scope){
         var offers_types_select = scope.find('select.offer-types'),
+            type_container = scope.find('.type-container'),  
             properties_container = scope.find('.properties-container'),  
             reset = new Reset(scope);   
         
         this.properties = function(){
           if (offers_types_select.val() != ''){
+             $.getJSON("#{service_offer_groups_type_path}", { id: offers_types_select.val() }, function(type){
+                if (!type){
+                  reset.properties();
+                  return false;
+                }            
+                var offers_type = '<div class="offer-type">';
+                offers_type +='<p>'+type.description;
+                offers_type +='</p>';  
+                type_container.html(offers_type);
+                type_container.stop(true,true).slideDown();
+              });
+              
             $.getJSON("#{service_offer_groups_properties_path}", { id: offers_types_select.val() }, function(properties){
               if (!properties || properties.length == 0){
                 reset.properties();
                 return false;
-              }
-              var offers_options = '<table class="offer-props">';
+              }            
+              
+              offers_options = '<table class="offer-props">';
               offers_options +='<tr>';
               for (var i=0; i < properties.length; i++) {
                 var property = properties[i];
@@ -73,5 +88,6 @@
             %option{ :value => '' } Выберите Тип
             - offer.offer_types.each do |type|
               %option{ :value => type.id }= type.title
+          .type-container{ :style => "display:none;" }
           .properties-container{ :style => "display:none;" }
         .envelope

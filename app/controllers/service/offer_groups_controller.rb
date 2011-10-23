@@ -5,6 +5,10 @@ class Service::OfferGroupsController < ServicesController
   def properties
     render :json => Offer::Type.find(params[:id]).offer_properties.to_json(:only => [ :id, :title ], :include => { :offer_property_options => { :only => [:id, :title, :price] } })
   end
+  
+  def type
+    render :json => Offer::Type.find(params[:id]).to_json(:only => [ :description, :pic ])
+  end
 
 private
 

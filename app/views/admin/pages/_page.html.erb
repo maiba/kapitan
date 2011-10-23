@@ -28,10 +28,7 @@
     </span>
   </div>
   <ul class='nested'>
-    <%= render :partial => 'page',
-               :collection => collection.select{|p| p.parent_id == page.id},
-               :locals => {
-                 :collection => collection
-               } if page.has_descendants? %>
+    <%= render :partial => 'page', :collection => page.children %>
   </ul>
+  
 </li>

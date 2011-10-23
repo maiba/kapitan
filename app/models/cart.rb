@@ -22,7 +22,7 @@ class Cart
     if item[:type] == 'package'
       @session[:cart] << { :id => item[:id].to_i, :type => item[:type] }
     elsif item[:type] == 'offer'
-      @session[:cart] << { :id => item[:id], :type => item[:type], :quantity => item[:quantity].to_i, :properties => item[:properties] }
+      @session[:cart] << { :id => item[:id], :type => item[:type], :quantity => item[:quantity].to_i, :offer_type => item[:offer_type], :properties => item[:properties] }
     end
     true
   end
@@ -37,9 +37,10 @@ class Cart
       Service::Package.find(item[:id]).price.to_f
     elsif item[:type] == 'offer'
       offer = Offer.find(item[:id])
+      offer_type = Offer::Type.find(item[:offer_type])
       offer_price = 0.0
       item[:properties].each do |key, value|
-        offer_price += offer.offer_properties.find(key.to_i).offer_property_options.find(value.to_i).price.to_f
+        offer_price += offer_type.offer_properties.find(key.to_i).offer_property_options.find(value.to_i).price.to_f
       end
       (offer_price * (item[:quantity].to_f / offer.quantity.to_f).to_f)
     end
