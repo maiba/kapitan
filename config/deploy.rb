@@ -74,12 +74,12 @@ end
 namespace :bundler do
   desc "Update bundler gems"
   task :update, roles => :app do
-    run "cd #{current} && #{bundle} update"
+    run "cd #{release_path} && #{bundle} update"
   end
 
   desc "Install bundler gems"
   task :install, roles => :app do
-    run "cd #{release_path} && #{bundle} install --path=~/.gems"
+    run "cd #{release_path} && #{bundle} install --path=~/.gems --deployment"
   end
 end
 
