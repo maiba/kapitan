@@ -1,0 +1,18 @@
+%h1 Заказы
+.account-page.white-pad
+  %table.orders{:style => "width:100%;", :border => 1, :cellpadding => 5, :cellspacing => 0}
+    %thead
+      %tr
+        - [:id, :status, :created_at].each do |attr|
+          %th= Order.human_attribute_name attr
+        %th &nbsp;
+    %tbody
+      - @orders.each do |order|
+        %tr
+          %td= order.id
+          %td= t(order.status, :scope => 'activerecord.attributes.order.statuses')
+          %td= l order.created_at, :format => '%H:%M %d.%m.%y'
+          %td= link_to "Подробнее..", [:cabinet, order]
+
+= render 'accounts/shared/menu'
+.clearfix

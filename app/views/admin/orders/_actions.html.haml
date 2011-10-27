@@ -1,0 +1,4 @@
+%ul
+  - if Admin::OrdersController.searchable?
+    %li= render "/shared/admin/search", :url => admin_orders_path
+  -# %li= link_to t('.create_new'), new_admin_order_path, :class => "add_icon"

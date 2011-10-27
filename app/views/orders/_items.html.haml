@@ -1,0 +1,21 @@
+:ruby
+  packages = order.data.map{|i| i if i[:type] == 'package' }.compact
+  offers = order.data.map{|i| i if i[:type] == 'offer' }.compact
+
+
+- if packages.any?
+  - packages.each do |package|
+    %table
+      %tr
+        %td= package[:title]
+        %td= package[:price]
+- if offers.any?
+  %br
+  - offers.each do |offer|
+    %table
+      %caption= offer[:title]
+      - offer[:items].each do |property|
+        %tr
+          %td= property[:title]
+          %td= property[:option][:title]
+          %td= property[:option][:price]

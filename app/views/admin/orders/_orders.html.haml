@@ -1,0 +1,19 @@
+= will_paginate @orders
+
+%table.orders{:style => "width:100%;", :border => 1, :cellpadding => 5, :cellspacing => 0}
+  %thead
+    %tr
+      - [:id, :account, :status, :created_at, :updated_at].each do |attr|
+        %th= Order.human_attribute_name attr
+      %th &nbsp;
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.id
+        %td= link_to order.account.title, [:admin, order.account]
+        %td= t(order.status, :scope => 'activerecord.attributes.order.statuses')
+        %td= l order.created_at, :format => '%H:%M %d.%m.%y'
+        %td= l order.updated_at, :format => '%H:%M %d.%m.%y'
+        %td
+          = link_to refinery_icon_tag("application_edit.png"), edit_admin_order_path(order), :title => t('.edit')
+          = link_to refinery_icon_tag("delete.png"), admin_order_path(order), :class => "cancel confirm-delete", :title => t('.delete'), :confirm => t('message', :scope => 'shared.admin.delete', :title => order.id), :method => :delete

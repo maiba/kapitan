@@ -1,7 +1,7 @@
 # require "whenever/capistrano"
 
 set :application, "kapitan"
-set :repository,  "git://github.com/gagarin-in-ua/kapitan.git"
+set :repository,  "git@github.com:gagarin-in-ua/kapitan.git"
 set :db_file, "kapitan.sqlite3"
 set :account, "tolik925"
 
