@@ -17,6 +17,8 @@ ru:
       title: Новости
     packages:
       title: Пакетные предложения
+    service_packages:
+      title: Пакетные предложения
 
   admin:
 

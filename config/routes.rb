@@ -61,6 +61,9 @@ Kapitan::Application.routes.draw do
     resources :offers, :except => :show do
       post :update_positions, :on => :collection
     end
+    resources :orders, :except => :show do
+      post :update_positions, :on => :collection
+    end
     resources :offer_groups, :except => :show do
       post :update_positions, :on => :collection
     end
