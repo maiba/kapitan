@@ -1,4 +1,7 @@
-/* @override http://localhost:3000/stylesheets/kapitan.css */
+/* @override 
+	http://localhost:3000/stylesheets/kapitan.css
+	http://kapitan.dev/stylesheets/kapitan.css
+*/
 
 /* @group reset */
 
@@ -1280,6 +1283,53 @@ legend {
 /* @end */
 
 /* @group objects */
+
+/* @group orders */
+
+table.orders td strong {
+	color: #24299b;
+}
+
+table.orders td{
+	padding: 10px;
+}
+
+table.orders a{
+	display: block;
+	background: url(/images/button-order.png);
+	width: 119px;
+	height: 26px;
+	color: #5f5f5f;
+	text-decoration: none;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 11px;
+	line-height: 26px;
+}
+
+table.orders-gut caption{
+	font-size: 20px;
+	color: #24299b;
+	font-weight: bold;
+}
+
+table.orders-gut td, th{
+	padding: 10px;
+}
+
+table.orders-gut{
+	border: 1px solid #797a7a;
+	margin: 5px 0px 15px;
+}
+
+strong.price{
+	padding-left: 10px;
+	font-size: 14px;
+}
+
+
+
+/* @end */
 
 /* @group inquiry */
 

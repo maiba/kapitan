@@ -1,9 +1,11 @@
 :ruby
   items = [
+    ["Мои файлы", account_attachments_path],
+    ["Мои заказы", cabinet_orders_path],
     ["Личная информация", cabinet_root_path],
-    ["Редактировать профиль", edit_account_registration_path],
-    ["Загрузка файлов", account_attachments_path]
+    ["Редактировать профиль", edit_account_registration_path]
   ]
+
 %ul#account-menu
   - items.each do |item|
-    %li= link_to item[0], item[1], :class => (request.request_uri.include?(item[1])) ? 'current' : nil
+    %li= link_to item[0], item[1], :class => (request.request_uri == item[1]) ? 'current' : nil

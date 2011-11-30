@@ -20,6 +20,7 @@ Kapitan::Application.routes.draw do
 
   namespace :cabinet do
     root :to => 'home#index'
+    resources :orders, :only => [:index, :show]
   end
 
   resources :ads, :only => [:index, :show] do
@@ -32,7 +33,6 @@ Kapitan::Application.routes.draw do
 
   resources :services, :only => [:index, :show] do
     resources :offer_groups, :only => [:show], :controller => 'service/offer_groups'
-    
   end
 
   resources :cart, :only => [:create, :destroy]

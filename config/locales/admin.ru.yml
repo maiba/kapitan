@@ -19,6 +19,8 @@ ru:
       title: Пакетные предложения
     service_packages:
       title: Пакетные предложения
+    orders:
+      title: Заказы
 
   admin:
 

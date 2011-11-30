@@ -1,6 +1,6 @@
 %h1 Личный кабинет
 #cabinet_root.account-page.white-pad
-  %h3 Добропожаловать #{@account.title}
+  %h3 Добро пожаловать, #{@account.title}
   = image_tag(@account.avatar.url, :class => 'avatar normal')
   - [:email, :name, :company, :phone, :site, :activity].each do |attr|
     - if @account.send(attr) && @account.send(attr).any?

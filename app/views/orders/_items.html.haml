@@ -7,15 +7,27 @@
   - packages.each do |package|
     %table
       %tr
-        %td= package[:title]
-        %td= package[:price]
+        - pack = Service::Package.find(package[:id])
+        %td= pack.title
+         
+    %strong.price= "Сумма заказа: #{order.price} грн"
 - if offers.any?
   %br
   - offers.each do |offer|
-    %table
-      %caption= offer[:title]
-      - offer[:items].each do |property|
+    %table.orders-gut
+      - offerdb = Offer.find(offer[:id])
+      %caption="#{offerdb[:title]} #{offerdb[:offer_type]}"
+      %tr
+        %th="Cвойство  предложения"
+        %th= "Выбранная опция"
+      - offer[:properties].each do |property|
         %tr
-          %td= property[:title]
-          %td= property[:option][:title]
-          %td= property[:option][:price]
+          - prop = Offer::Type::Property.find(property[0])
+          %td= prop[:title]
+          - option = Offer::Type::Property::Option.find(property[1])
+          %td= option[:title]
+    
+    %strong.price= "Сумма заказа: #{order.price} грн"
+      
+      
+  

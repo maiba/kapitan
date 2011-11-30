@@ -111,8 +111,7 @@
                 properties_html += ' \
                   <div class="field"> \
                     <label for="property_'+property.id+'">'+property.title+'</label> \
-                    <select id="property_'+property.id+'" class="property" data-id="'+property.id+'"> \
-                      <option value="">Выберите</option> \
+                    <select id="property_'+property.id+'" class="property" multiple size="'+properties.length+'" data-id="'+property.id+'"> \
                 ';
                 for (var ii=0; ii < property.offer_property_options.length; ii++) {
                   var option = property.offer_property_options[ii];

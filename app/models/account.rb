@@ -11,6 +11,8 @@ class Account < ActiveRecord::Base
 
   has_many :attachments, :class_name => "Account::Attachment", :foreign_key => "account_id"
 
+  has_many :orders, :foreign_key => "account_id"
+
   has_attached_file :avatar,
     :default_url => '/images/no-avatar.png',
       :default_style => :normal,
@@ -39,5 +41,7 @@ class Account < ActiveRecord::Base
   def title
     name || email
   end
+
+
 
 end

@@ -4,15 +4,20 @@
     %thead
       %tr
         - [:id, :status, :created_at].each do |attr|
-          %th= Order.human_attribute_name attr
+          %th= " "
         %th &nbsp;
     %tbody
       - @orders.each do |order|
         %tr
-          %td= order.id
-          %td= t(order.status, :scope => 'activerecord.attributes.order.statuses')
-          %td= l order.created_at, :format => '%H:%M %d.%m.%y'
-          %td= link_to "Подробнее..", [:cabinet, order]
-
+          %td
+            %strong= "Заказ №"
+            %strong= order.id
+          %td= order.price.to_s + " грн " unless order.price.blank?
+          %td= l order.created_at, :format => '%d.%m.%y'
+          %td.button-order= link_to t(order.status, :scope => 'activerecord.attributes.order.statuses'), [:cabinet, order]
+      %tr
+        - [:id, :status, :created_at].each do |attr|
+          %td= " "
+        %td &nbsp;
 = render 'accounts/shared/menu'
 .clearfix

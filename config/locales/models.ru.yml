@@ -56,3 +56,9 @@ ru:
         title: Заголовок
         photo: Фото
         content: Контент
+      
+      order:
+        statuses:
+          new: новый
+          processing: в обрвботке
+          finished: оформлен
