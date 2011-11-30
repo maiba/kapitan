@@ -9,8 +9,7 @@
       %tr
         - pack = Service::Package.find(package[:id])
         %td= pack.title
-         
-    %strong.price= "Сумма заказа: #{order.price} грн"
+
 - if offers.any?
   %br
   - offers.each do |offer|
