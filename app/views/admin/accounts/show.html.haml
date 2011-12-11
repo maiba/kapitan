@@ -1,0 +1,27 @@
+%h1.title
+  = @account.email
+%span.title
+  = @account.name if @account.name
+  %span.preview &nbsp;
+  %span.actions
+    = link_to refinery_icon_tag("application_edit.png"), edit_admin_account_path(@account), :title => t('.edit')
+    = link_to refinery_icon_tag("delete.png"), admin_account_path(@account), :class => "cancel confirm-delete", :title => t('.delete'), :confirm => t('message', :scope => 'shared.admin.delete', :title => @account.title), :method => :delete
+
+%h2
+  ="Заказы:"
+%table.orders{:style => "width:100%;", :border => 1, :cellpadding => 5, :cellspacing => 0}
+  %thead
+    %tr
+      - [:id, :status, :created_at, :updated_at].each do |attr|
+        %th= Order.human_attribute_name attr
+      %th &nbsp;
+  %tbody
+    - @account.orders.each do |order|
+      %tr
+        %td= order.id
+        %td= t(order.status, :scope => 'activerecord.attributes.order.statuses')
+        %td= l order.created_at, :format => '%H:%M %d.%m.%y'
+        %td= l order.updated_at, :format => '%H:%M %d.%m.%y'
+        %td
+          = link_to refinery_icon_tag("application_edit.png"), edit_admin_order_path(order), :title => t('.edit')
+          = link_to refinery_icon_tag("delete.png"), admin_order_path(order), :class => "cancel confirm-delete", :title => t('.delete'), :confirm => t('message', :scope => 'shared.admin.delete', :title => order.id), :method => :delete
