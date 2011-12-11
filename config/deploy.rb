@@ -1,4 +1,8 @@
-# require "whenever/capistrano"
+require 'hipchat/capistrano'
+
+set :hipchat_token, "05edca91435a3f02d71c928658bfee"
+set :hipchat_room_name, "Kapitan"
+set :hipchat_announce, true
 
 set :application, "kapitan"
 set :repository,  "git@github.com:gagarin-in-ua/kapitan.git"
