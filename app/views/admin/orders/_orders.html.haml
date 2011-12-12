@@ -1,10 +1,30 @@
+- content_for :stylesheets do
+  :plain
+    <style type="text/css" media="screen">
+      th .current {  
+        padding-right: 12px;  
+        background-repeat: no-repeat;  
+        background-position: right center;  
+      }  
+      th .asc {   
+        background-image: url(/images/up_arrow.gif);   
+      }  
+
+      th .desc {   
+        background-image: url(/images/down_arrow.gif);   
+      }
+    </style>
+
+
 = will_paginate @orders
 
 %table.orders{:style => "width:100%;", :border => 1, :cellpadding => 5, :cellspacing => 0}
   %thead
     %tr
-      - [:id, :account, :status, :created_at, :updated_at].each do |attr|
-        %th= Order.human_attribute_name attr
+      - [:id, :account].each do |attr|
+        %th= attr
+      - [:status, :created_at, :updated_at].each do |attr|
+        %th=sortable attr
       %th &nbsp;
   %tbody
     - @orders.each do |order|
