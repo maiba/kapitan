@@ -86,8 +86,11 @@ ru:
       offer_property_fields:
         add_option: Добавить опцию
         remove_property: Удалить свойство
+        add_discount: Добавить скидку
       offer_property_option_fields:
         remove_option: Удалить опцию
+      offer_type_property_discount_fields:
+        remove_discount: Удалить скидку
 
     services:
       actions:
