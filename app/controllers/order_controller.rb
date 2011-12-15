@@ -8,12 +8,12 @@ class OrderController < ApplicationController
 
       if @order.save
         cart.delete_all
-        render :js => %|$.growl.notice('Спасибо за заказ.');|
+        redirect_to cabinet_orders_path
       else
         render :js => %|$.growl.error('Извините, не получилось. Попробуйте, пожалуйста, позднее.');|
       end
     else
-      render :js => %|$.growl.alert('Пожалуйста, авторизуйтесь.');|
+      redirect_to new_account_session_path
     end
   end
 
