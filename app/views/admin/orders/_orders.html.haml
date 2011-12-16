@@ -15,14 +15,13 @@
       }
     </style>
 
-
 = will_paginate @orders
 
 %table.orders{:style => "width:100%;", :border => 1, :cellpadding => 5, :cellspacing => 0}
   %thead
     %tr
       - [:id, :account].each do |attr|
-        %th= attr
+        %th= Order.human_attribute_name attr
       - [:status, :created_at, :updated_at].each do |attr|
         %th=sortable attr
       %th &nbsp;
