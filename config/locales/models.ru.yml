@@ -60,5 +60,5 @@ ru:
       order:
         statuses:
           new: новый
-          processing: в обрвботке
+          processing: в обработке
           finished: оформлен

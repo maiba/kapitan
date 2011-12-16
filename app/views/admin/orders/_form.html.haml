@@ -29,7 +29,7 @@
  
   .field
     = f.label :status
-    = select(:order, :status, [['Новый', 'new'], ['В обработке', 'processing'], ['Выполнен', 'finished']])
+    = select(:order, :status, [['Новый', 'new'], ['В обработке', 'processing'], ['Оформлен', 'finished']])
 
   = render "/shared/admin/form_actions", :f => f, :continue_editing => false, :delete_title => t('delete', :scope => 'admin.orders.order'), :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @order.status)
 
