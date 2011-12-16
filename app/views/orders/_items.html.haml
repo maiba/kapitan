@@ -5,12 +5,12 @@
 
 - if packages.any?
   - packages.each do |package|
-    %table
+    %table.orders-gut
+      - pack = Service::Package.find(package[:id])
+      %caption= pack.title
       %tr
-        - pack = Service::Package.find(package[:id])
-        %td= pack.title
-        
-    %strong.price= "Сумма заказа: #{order.price} грн"
+        %td
+          %strong.price= "Сумма заказа: #{order.price} грн"
 
 - if offers.any?
   %br
@@ -29,6 +29,3 @@
           %td= option[:title]
     
     %strong.price= "Сумма заказа: #{order.price} грн"
-      
-      
-  
