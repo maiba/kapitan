@@ -233,7 +233,7 @@
             .clearfix
             %br
             
-            %h4 Воспользуйтесь готовыми предложениями!
+            %h4= "Воспользуйтесь готовыми предложениями!" unless service.service_packages.blank?
             .packages-container
               - service.service_packages.each do |package|
                 .package
