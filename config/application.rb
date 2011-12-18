@@ -24,5 +24,8 @@ module Kapitan
       Refinery.searchable_models = [Page, NewsItem, Article]
     end
     config.action_mailer.default_url_options = { :host => 'www.kapitan.kh.ua' }
+    config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do
+         r301 %r{^/(.*)/$}, '/$1'
+        end
   end
 end

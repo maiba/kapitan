@@ -18,6 +18,7 @@ gem 'refinerycms', '= 1.0.8'
 gem 'refinerycms-search', '~> 0.9.8'
 gem 'refinerycms-i18n', '~> 1.0.0'
 gem 'refinerycms-inquiries', '~> 0.9.9.9', :path => 'vendor/engines'
+gem 'rack-rewrite'
 
 group :development, :test do
   gem 'hirb'
