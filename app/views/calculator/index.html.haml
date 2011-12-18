@@ -48,6 +48,7 @@
             types_container = scope.find('.types-container'),
             types_selects = types_container.find('select.type'),
             properties_container = scope.find('.properties-container'),
+            discounts = scope.find('.discounts-container'),
             properties_selects = properties_container.find('select.property'),
             price = scope.find('.price.property'),
             price_holder = price.find('.price_holder'),
@@ -116,8 +117,13 @@
                 for (var ii=0; ii < property.offer_property_options.length; ii++) {
                   var option = property.offer_property_options[ii];
                   properties_html += '<option value="'+option.price+'" data-id="'+option.id+'">'+option.title+'</option>';
-                };                
+                };
                 properties_html += '</select></div>';
+                for (var ik=0; ik < property.offer_type_property_discounts.length; ik++) {
+                  var discount = property.offer_type_property_discounts[ik];
+                  properties_html += '<div style="color:gray;"><i>* При заказе более<span class="limit"> '+discount.limit+'</span> объявлений начисляется скидка <span class="percent">'+discount.percent+'</span> процентов.</i></div>'; 
+                  discount+='<span class="limit"> '+discount.limit+'</span><span class="percent">'+discount.percent+'</span>';
+                };                   
               };
               var quantity = offers_select.find('option:selected').data('quantity'),
                   suffix = offers_select.find('option:selected').data('suffix');
@@ -152,8 +158,7 @@
             }
           });
           var offer_quantity = parseInt(offers_select.find('option:selected').data('quantity'), 10),
-              quantity = parseInt(scope.find('.offer-quantity').val(), 10);
-              
+              quantity = parseInt(scope.find('.offer-quantity').val(), 10); 
           total_price = ( total_price * ( parseInt(quantity, 10) / parseInt(offer_quantity, 10) ) ).toFixed(2);
           price_holder.html(total_price);
           if (not_all_selected){
@@ -178,7 +183,7 @@
                   dataType: "script",
                   data: { item: offer }
                 });
-              });
+              });     
           }
         };
       }
@@ -225,6 +230,7 @@
               %select.offers{ :id => "service_#{service.id}_offers" }
             .types-container{ :style => "display:none;" }
             .properties-container{ :style => "display:none;" }
+            .discounts-container{ :style =>"display:none;" }
             .price.property{ :style => 'display:none;' }
               Сумма:
               %span.price_holder 0.00

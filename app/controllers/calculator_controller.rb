@@ -16,7 +16,9 @@ class CalculatorController < ApplicationController
   end
 
   def properties
-    render :json => Offer::Type.find(params[:id]).offer_properties.to_json(:only => [ :id, :title ], :include => { :offer_property_options => { :only => [:id, :title, :price] } })
+    render :json => Offer::Type.find(params[:id]).offer_properties.to_json(:only => [ :id, :title ],
+     :include => { :offer_property_options => { :only => [:id, :title, :price]},
+                    :offer_type_property_discounts => { :only => [:id, :limit, :percent] }})
   end
 
 end
