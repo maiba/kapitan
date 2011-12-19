@@ -1,7 +1,7 @@
 #left_menu
-  = form_tag search_url, :id => 'search-bar' do
+  = form_tag search_url, :method => :get, :id => 'search-bar' do
     = text_field_tag :query, {}, {:value => (params[:query] if params[:query]), :placeholder => 'поиск'}
-    = submit_tag ""
+    = submit_tag "", :name => nil
   %ul
     %li
       - if account_signed_in?

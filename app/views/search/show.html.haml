@@ -4,9 +4,10 @@
       %h2 Всего найдено: #{@results.count}
       - @results.each do |result|
         - content = (result.class == Page ? result.parts.map(&:body).join('') : result.content)
-        %li{ :class => cycle('even', 'odd') }
-          %span.result_type= result.class.name
+        %li{ :class => cycle('even', 'odd'), :style => 'margin-bottom:2em;'}
+          %span.result_type{:style => 'float:right; margin: 0 0 0.5em 1em;'}
+            %strong= result.class.human_name
           %h3= link_to raw(result.title.gsub(/(#{params[:query]})/i, '<mark>\1</mark>')), result_url(result)
-          .content= raw truncate_html(raw(content), :length => 600).gsub(/(#{params[:query]})/i, '<mark>\1</mark>')
+          .content=raw truncate(strip_tags(content), :length => 600).gsub(/(#{params[:query]})/i, '<mark>\1</mark>')
   - else
     %h1 По вашему запросу ничего не найдено

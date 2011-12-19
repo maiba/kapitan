@@ -4,11 +4,14 @@ ru:
     models:
 
       account: Аккаунт
-      inquiry: Запрос
       account_attachment: Файлы пользователя
+      article: Статья
+      inquiry: Запрос
+      news_item: Новости
       offer: Предложение
-      offer/property: Свойство
-      offer/property/option: Опция
+      'offer/property': Свойство
+      'offer/property/option': Опция
+      page: Страница
 
     attributes:
 
