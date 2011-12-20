@@ -12,7 +12,7 @@
         = f.text_field :email, :value => (account_signed_in?) ? current_account.email : nil
       .line
         = f.label :phone
-        = f.text_field :phone, :value => (account_signed_in? && current_account.phone.any?) ? current_account.phone : nil
+        = f.text_field :phone, :value => (account_signed_in? && current_account.phone && current_account.phone.any?) ? current_account.phone : nil
       .line
         = f.required_label :message
         = f.text_area :message, :rows => 8
