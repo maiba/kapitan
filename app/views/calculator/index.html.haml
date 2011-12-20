@@ -24,12 +24,12 @@
       
       function Reset(service){
         this.offers = function() {
-            service.find('.offers-container').slideUp();
+          service.find('.offers-container').slideUp();
           this.types();
         };
         
         this.types = function() {
-            service.find('.types-container').slideUp();
+          service.find('.types-container').slideUp();
           this.properties();
         };
         
@@ -119,11 +119,13 @@
                   properties_html += '<option value="'+option.price+'" data-id="'+option.id+'">'+option.title+'</option>';
                 };
                 properties_html += '</select></div>';
+                var discounts_html='';
                 for (var ik=0; ik < property.offer_type_property_discounts.length; ik++) {
                   var discount = property.offer_type_property_discounts[ik];
-                  properties_html += '<div style="color:gray;"><i>* При заказе более<span class="limit"> '+discount.limit+'</span> объявлений начисляется скидка <span class="percent">'+discount.percent+'</span> процентов.</i></div>'; 
-                  discount+='<span class="limit"> '+discount.limit+'</span><span class="percent">'+discount.percent+'</span>';
-                };                   
+                  properties_html += '<div style="color:gray;"><i>* При заказе более<span class="limit"> '+discount.limit+'</span> объявлений начисляется скидка <span class="percent">'+discount.percent+'</span> %.</i></div>'; 
+                  discounts_html+='<span class="limit">'+discount.limit+'</span><span class="percent">'+discount.percent+'</span>';
+                };      
+                discounts.html(discounts_html);             
               };
               var quantity = offers_select.find('option:selected').data('quantity'),
                   suffix = offers_select.find('option:selected').data('suffix');
@@ -158,9 +160,24 @@
             }
           });
           var offer_quantity = parseInt(offers_select.find('option:selected').data('quantity'), 10),
-              quantity = parseInt(scope.find('.offer-quantity').val(), 10); 
-          total_price = ( total_price * ( parseInt(quantity, 10) / parseInt(offer_quantity, 10) ) ).toFixed(2);
+              quantity = parseInt(scope.find('.offer-quantity').val(), 10), 
+          total_price = ( total_price * ( parseInt(quantity, 10) / parseInt(offer_quantity, 10) ) ).toFixed(2);  
+          
+          if (discounts.children('.limit').length > 0) {
+            var percent_value=100;
+           discounts.children('.limit').each(function() {
+              if ($(this).text() && $(this).text()!='') {
+                var limit_value = parseInt($(this).text());
+                  if (limit_value != NaN && quantity > limit_value){
+                    var percent = $($(this).next('.percent')).text();
+                    percent_value= parseInt(percent);
+                  } 
+                }
+            });
+            total_price = total_price-total_price*percent_value/100;
+          }
           price_holder.html(total_price);
+          
           if (not_all_selected){
             if (add_to_cart_button.is(':visible'))
               add_to_cart_button.hide('slide').unbind();
@@ -183,9 +200,10 @@
                   dataType: "script",
                   data: { item: offer }
                 });
-              });     
+              });       
           }
         };
+        
       }
             
       $('select.offer_groups').live('change', function() {

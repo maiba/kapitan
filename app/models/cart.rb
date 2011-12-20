@@ -39,8 +39,18 @@ class Cart
       offer = Offer.find(item[:id])
       offer_type = Offer::Type.find(item[:offer_type])
       offer_price = 0.0
+      given_discount = 0
       item[:properties].each do |key, value|
         offer_price += offer_type.offer_properties.find(key.to_i).offer_property_options.find(value.to_i).price.to_f
+        offer_discounts = offer_type.offer_properties.find(key.to_i).offer_type_property_discounts
+        offer_discounts.each do |discount|
+          if item[:quantity] > discount.limit
+            given_discount = discount.percent
+          end
+        end
+        if given_discount > 0
+          offer_price = (offer_price - offer_price * given_discount / 100)
+        end
       end
       (offer_price * (item[:quantity].to_f / offer.quantity.to_f).to_f)
     end
