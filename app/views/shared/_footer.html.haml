@@ -75,9 +75,9 @@
     .social
       %h5 Социальные сети
       .icons
-        = link_to image_tag('vkontakte.png'), RefinerySetting.find_or_set(:vkontake_link, 'http://vkontakte.ru'), :target => '_blank'
-        = link_to image_tag('facebook.png'), RefinerySetting.find_or_set(:facebook_link, 'http://facebook.com'), :target => '_blank'
-        = link_to image_tag('twitter.png'), RefinerySetting.find_or_set(:twitter_link, 'http://twitter.com'), :target => '_blank'
+        = link_to image_tag('vkontakte.png'), RefinerySetting.find_or_set(:vkontake_link, 'http://vkontakte.ru'), :target => '_blank', :rel => "nofollow"
+        = link_to image_tag('facebook.png'), RefinerySetting.find_or_set(:facebook_link, 'http://facebook.com'), :target => '_blank', :rel => "nofollow"
+        = link_to image_tag('twitter.png'), RefinerySetting.find_or_set(:twitter_link, 'http://twitter.com'), :target => '_blank', :rel => "nofollow"
 
   .clearfix
 - content_for :javascripts do
