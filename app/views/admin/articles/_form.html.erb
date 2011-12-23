@@ -22,7 +22,7 @@
       <div id='page_part_editors'>
         <% [:content].each do |part| %>
           <div class='page_part' id='<%= part %>'>
-            <%= f.text_area part, :rows => 20, :class => 'wymeditor widest' -%>
+            <%= f.text_area part, :rows => 20, :class => 'elrte widest' -%>
           </div>
         <% end %>
       </div>

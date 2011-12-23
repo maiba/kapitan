@@ -1,3 +1,19 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag('elrte', 'elrte.ru.js') %>
+  <%= javascript_tag do %>
+    $(document).ready(function(){
+      $('.elrte').elrte({
+        cssClass : 'el-rte',
+        lang     : 'ru',
+        height   : 450,
+        toolbar  : 'complete',
+        cssfiles : ['/stylesheets/elrte-inner.css']
+      });   
+    });
+  <% end %>
+<% end %>
+<% content_for :stylesheets, stylesheet_link_tag('elrte') %>
+
 <% url_opts = action_name == 'edit' ? {:url => admin_page_path(@page.id)} : {} %>
 <%= form_for [:admin, @page], url_opts do |f| %>
 
