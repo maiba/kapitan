@@ -107,6 +107,7 @@
                 return false;
               }
               var properties_html = '';
+              var suffix = offers_select.find('option:selected').data('suffix');
               for (var i=0; i < properties.length; i++) {
                 var property = properties[i];
                 properties_html += ' \
@@ -122,14 +123,12 @@
                 var discounts_html='';
                 for (var ik=0; ik < property.offer_type_property_discounts.length; ik++) {
                   var discount = property.offer_type_property_discounts[ik];
-                  properties_html += '<div style="color:gray;"><i>* При заказе более<span class="limit"> '+discount.limit+'</span> объявлений начисляется скидка <span class="percent">'+discount.percent+'</span> %.</i></div>'; 
+                  properties_html += '<div style="color:gray;"><i>* При заказе более<span class="limit"> '+discount.limit+'</span> ' + suffix + ' начисляется скидка <span class="percent">'+discount.percent+'</span> %.</i></div>'; 
                   discounts_html+='<span class="limit">'+discount.limit+'</span><span class="percent">'+discount.percent+'</span>';
                 };      
                 discounts.html(discounts_html);             
               };
-              var quantity = offers_select.find('option:selected').data('quantity'),
-                  suffix = offers_select.find('option:selected').data('suffix');
-              
+              var quantity = offers_select.find('option:selected').data('quantity');
               properties_html += '\
                 <div> \
                   за \
