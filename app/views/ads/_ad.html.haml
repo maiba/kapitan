@@ -8,7 +8,7 @@
           anim_delay = 500;
       var load_new_ad = function() {
         $.getJSON('#{random_ads_path}', {side: "#{side}"}, function(data) {
-          $('<img src="'+data.src+'" />').load(function() {
+          $('<img src="'+data.src+'" />').imagesLoaded(function() {
             image.fadeTo(anim_delay, 0.2, function() {
               banner.attr('href', data.url);
               $(this).attr('src', data.src).fadeTo(anim_delay, 1, function() {
@@ -20,4 +20,5 @@
       };
       setTimeout(load_new_ad, load_delay);
     });
-= link_to image_fu(ad.photo, '200x300>'), ad.link, :id => "#{side}_ad-banner"
+= link_to ad.link, :id => "#{side}_ad-banner"do
+  = image_tag "#{ad.photo(200*200).url}?#{rand(1_000_000)}"
