@@ -17,7 +17,7 @@ module Kapitan
     config.active_record.include_root_in_json = false
     # JavaScript files you want as :defaults (application.js is always included).
     config.action_view.stylesheet_expansions[:defaults] = %w(kapitan)
-    config.action_view.javascript_expansions[:defaults] = %w(jquery jquery-ui library rails jquery-imagesloaded)
+    config.action_view.javascript_expansions[:defaults] = %w(jquery jquery-ui library rails s3Slider)
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
     config.to_prepare do

@@ -1,24 +1,17 @@
-- ad = Ad.side(side).random
+- @ads=Ad.all
 - content_for :javascripts do
   :javascript
     $(document).ready(function() {
-      var banner = $("##{side}_ad-banner"),
-          image = banner.find('img'),
-          load_delay = 6000,
-          anim_delay = 500;
-      var load_new_ad = function() {
-        $.getJSON('#{random_ads_path}', {side: "#{side}"}, function(data) {
-          $('<img src="'+data.src+'" />').imagesLoaded(function() {
-            image.fadeTo(anim_delay, 0.2, function() {
-              banner.attr('href', data.url);
-              $(this).attr('src', data.src).fadeTo(anim_delay, 1, function() {
-                setTimeout(load_new_ad, load_delay);
-              });
-            });
-          });
-        });
-      };
-      setTimeout(load_new_ad, load_delay);
+       $('#s3slider_#{side}').s3Slider({
+          timeOut: 4000
+       });
     });
-= link_to ad.link, :id => "#{side}_ad-banner"do
-  = image_tag "#{ad.photo(200*200).url}?#{rand(1_000_000)}"
+%div{:id => "s3slider_#{side}"}
+  %ul{:id => "s3slider_#{side}Content"}
+    - @ads.shuffle.each do |ad|
+      %li{:class => "s3slider_#{side}Image"}
+        = link_to ad.link, :id => "#{side}_ad-banner"do
+          = image_tag ad.photo(200*200).url
+        %span
+          = ad.title
+    .clear{:class => "s3slider_#{side}Image" } &nbsp;
