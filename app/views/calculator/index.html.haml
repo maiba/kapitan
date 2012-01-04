@@ -163,7 +163,7 @@
           total_price = ( total_price * ( parseInt(quantity, 10) / parseInt(offer_quantity, 10) ) ).toFixed(2);  
           
           if (discounts.children('.limit').length > 0) {
-            var percent_value=100;
+            var percent_value=0;
            discounts.children('.limit').each(function() {
               if ($(this).text() && $(this).text()!='') {
                 var limit_value = parseInt($(this).text());
@@ -173,7 +173,7 @@
                   } 
                 }
             });
-            total_price = total_price-total_price*percent_value/100;
+            total_price = total_price*(1 - percent_value/100);
           }
           price_holder.html(total_price);
           

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   add_crumb "Главная", '/'
 
-  rescue_from ActiveRecord::RecordNotFound, ActionController::UnknownAction, ActionView::MissingTemplate, :with => :error_404
+  rescue_from ActiveRecord::RecordNotFound, ActionController::UnknownAction, ActionView::MissingTemplate, :with => :error_404 unless Rails.env == "development"
 
 
 private
