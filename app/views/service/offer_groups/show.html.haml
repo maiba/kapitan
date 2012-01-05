@@ -55,7 +55,7 @@
               };
               offers_options +='</tr>'; 
               offers_options +='</table>'; 
-               var suffix='обьявлений';
+              var suffix = offers_types_select.find('option:selected').data('suffix');
               for (var j=0; j < properties.length; j++) { 
                 var property = properties[j];
                  for (var ik=0; ik < property.offer_type_property_discounts.length; ik++) {
@@ -95,7 +95,7 @@
       .content.white-pad
         .offer-container
           %h3= offer.title
-          = image_fu offer.photo, '160x70>', :style => 'float:right;margin-left:15px;margin-top:-40px;' 
+          = image_fu offer.photo, '160x70>', :style => 'float:right;margin-left:15px;margin-top:-40px;'
           %select.offer-types{:id => "offer-type-#{offer.id}", :'data-id' => offer.id }
             %option{ :value => '' } Выберите Тип
             - offer.offer_types.each do |type|
