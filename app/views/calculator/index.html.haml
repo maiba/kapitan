@@ -101,6 +101,7 @@
         
         this.properties = function(){
           if (types_selects.val() != ''){
+            alert(types_selects.val());
             $.getJSON("#{calculator_properties_path}", { id: types_selects.val() }, function(properties){
               if (!properties || properties.legnth == 0){
                 reset.properties();
@@ -211,7 +212,7 @@
       $('select.offers').live('change', function(){
         new Draw($(this).parents('.service-container')).types();
       });
-      $('select.type').live('change keyup', function() {
+      $('select.type').live('change', function() {
         new Draw($(this).parents('.service-container')).properties($(this));
       });
       $('select.property, .offer-quantity').live('change keyup', function() {
