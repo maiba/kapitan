@@ -101,7 +101,6 @@
         
         this.properties = function(){
           if (types_selects.val() != ''){
-            alert(types_selects.val());
             $.getJSON("#{calculator_properties_path}", { id: types_selects.val() }, function(properties){
               if (!properties || properties.legnth == 0){
                 reset.properties();
@@ -112,9 +111,10 @@
               for (var i=0; i < properties.length; i++) {
                 var property = properties[i];
                 properties_html += ' \
-                  <div class="field"> \
+                                  <div class="field"> \
                     <label for="property_'+property.id+'">'+property.title+'</label> \
                     <select id="property_'+property.id+'" class="property" data-id="'+property.id+'"> \
+                    <option value="">..</option> \
                 ';
                 for (var ii=0; ii < property.offer_property_options.length; ii++) {
                   var option = property.offer_property_options[ii];
