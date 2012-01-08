@@ -3,9 +3,9 @@
   %table.orders{:style => "width:100%;", :border => 1, :cellpadding => 5, :cellspacing => 0}
     %thead
       %tr
-        - [:id, :status, :created_at].each do |attr|
-          %th= " "
-        %th &nbsp;
+        %th= " "
+        - [:price, :created_at, :status].each do |attr|
+          %th=sortable attr
     %tbody
       - @orders.each do |order|
         %tr

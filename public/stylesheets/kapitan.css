@@ -1295,6 +1295,12 @@ table.orders td{
 }
 
 table.orders a{
+	vertical-align: middle;
+	font-size: 11px;
+	line-height: 26px;
+}
+
+.button-order a{
 	display: block;
 	background: url(/images/button-order.png);
 	width: 119px;
