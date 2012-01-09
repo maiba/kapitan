@@ -21,7 +21,7 @@ module Kapitan
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
     config.to_prepare do
-      Refinery.searchable_models = [Page, NewsItem, Article]
+      Refinery.searchable_models = [Page, NewsItem, Article, Service, Offer, Offer::Group, Offer::Type]
     end
     config.action_mailer.default_url_options = { :host => 'www.kapitan.kh.ua' }
     config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do

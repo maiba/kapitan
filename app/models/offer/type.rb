@@ -1,4 +1,6 @@
 class Offer::Type < ActiveRecord::Base
+  
+  acts_as_indexed :fields => [:title, :description]
 
   belongs_to :offer, :class_name => "::Offer", :foreign_key => "offer_id"
 
