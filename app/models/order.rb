@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
 
-  Statuses = %w( new processing finished )
+  Statuses = %w( new processing finished closed )
 
   serialize :data
 

@@ -63,5 +63,6 @@ ru:
       order:
         statuses:
           new: новый
-          processing: в обработке
-          finished: оформлен
+          processing: принят
+          finished: выполнен
+          closed: закрыт
