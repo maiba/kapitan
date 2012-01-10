@@ -1,0 +1,53 @@
+:ruby
+  packages = order.data.map{|i| i if i[:type] == 'package' }.compact
+  offers = order.data.map{|i| i if i[:type] == 'offer' }.compact
+
+
+- if packages.any?
+  - packages.each do |package|
+    %h1= link_to order.account.email, [:admin, order.account]
+    %h3
+      ="Заказ №"
+      = order.id
+    %h3
+      ="Создан"
+      = order.created_at
+    %table.orders-gut
+      - pack = Service::Package.find(package[:id])
+      %tr
+        %th= "Наименование"
+      %tr
+        %td= pack.title
+      %tr
+        %td
+          %strong.price= "Сумма заказа: #{order.price} грн"
+
+- if offers.any?
+  %br
+  - offers.each do |offer|
+    %h1= link_to order.account.email, [:admin, order.account]
+    %h3
+      ="Заказ №"
+      = order.id
+    %h3
+      ="Создан"
+      = order.created_at
+    %table.orders-gut
+      - offerdb = Offer.find(offer[:id])
+      %tr
+        %th= "Наименование"
+        %th= "Cвойство  предложения"
+        %th= "Количество/размер"
+        %th= "Сумма с учетом скидки, грн"
+      - offer[:properties].each do |property|
+        %tr
+          %td="#{offerdb[:title]} #{offerdb[:offer_type]}"
+          - prop = Offer::Type::Property.find(property[0])
+          %td
+            = prop[:title]
+            - option = Offer::Type::Property::Option.find(property[1])
+            = option[:title]
+          %td= "coming soon"
+          %td= "coming soon"
+    
+    %strong.price= "Сумма заказа: #{order.price} грн"
