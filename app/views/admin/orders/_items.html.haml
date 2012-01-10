@@ -38,7 +38,7 @@
         %th= "Наименование"
         %th= "Cвойство  предложения"
         %th= "Количество/размер"
-        %th= "Сумма с учетом скидки, грн"
+        %th= "Сумма, грн"
       - offer[:properties].each do |property|
         %tr
           %td="#{offerdb[:title]} #{offerdb[:offer_type]}"
@@ -47,7 +47,7 @@
             = prop[:title]
             - option = Offer::Type::Property::Option.find(property[1])
             = option[:title]
-          %td= "coming soon"
-          %td= "coming soon"
+          %td= offer[:quantity]
+          %td= option[:price]
     
     %strong.price= "Сумма заказа: #{order.price} грн"
