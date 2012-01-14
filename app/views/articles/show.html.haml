@@ -1,3 +1,9 @@
+- content_for :meta do
+  - if @article.meta_description.present?
+    %meta{ :name => "description", :content => @article.meta_description }
+  - if @article.meta_keywords.present?
+    %meta{ :name => "keywords", :content => @article.meta_keywords }
+
 - content_for :title, @article.title
 %h1= @article.title
 #article.white-pad

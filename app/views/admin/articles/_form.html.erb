@@ -35,6 +35,10 @@
                 :delete_title => t('delete', :scope => 'admin.articles.article'),
                 :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @article.title)
               } %>
+  <div class="hemisquare right_side">
+      <%= render :partial => '/seo_meta/form',
+                 :locals => { :form => f } %>
+  </div>
 <% end -%>
 <% content_for :javascripts do %>
   <script>
