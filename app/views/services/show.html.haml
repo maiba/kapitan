@@ -1,6 +1,10 @@
+- content_for :meta do
+  - if @service.meta_description.present?
+    %meta{ :name => "description", :content => @service.meta_description }
+  - if @service.meta_keywords.present?
+    %meta{ :name => "keywords", :content => @service.meta_keywords }
 - content_for :title, @service.title
 - content_for :body_content_title, @service.title
-
 
 = render "/shared/content_page"
 
