@@ -170,11 +170,11 @@
                 var limit_value = parseInt($(this).text());
                   if (limit_value != NaN && quantity > limit_value){
                     var percent = $($(this).next('.percent')).text();
-                    percent_value= parseInt(percent);
+                    percent_value= parseFloat(percent);
                   } 
                 }
             });
-            total_price = total_price*(1 - percent_value/100);
+            total_price = (total_price*(1 - percent_value/100)).toFixed(2);
           }
           price_holder.html(total_price);
           
