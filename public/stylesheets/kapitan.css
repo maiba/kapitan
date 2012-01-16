@@ -1850,13 +1850,13 @@ table.border, table.border td {border: 1px solid black;}
 /* s3Slider */
 #s3slider_left {
    width: 200px; /* important to be same as image width */
-   height: 200px; /* important to be same as image height */
+   height: 265px; /* important to be same as image height */
    position: relative; /* important */
    overflow: hidden; /* important */
 }
 #s3slider_right {
    width: 200px; /* important to be same as image width */
-   height: 200px; /* important to be same as image height */
+   height: 265px; /* important to be same as image height */
    position: relative; /* important */
    overflow: hidden; /* important */
 }

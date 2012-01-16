@@ -11,7 +11,7 @@
     - @ads.shuffle.each do |ad|
       %li{:class => "s3slider_#{side}Image"}
         = link_to ad.link, :id => "#{side}_ad-banner"do
-          = image_tag ad.photo(200*200).url
+          = image_tag ad.photo(193*264).url
         %span
           = ad.title
     .clear{:class => "s3slider_#{side}Image" } &nbsp;
