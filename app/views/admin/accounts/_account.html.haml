@@ -1,6 +1,6 @@
 %li{ :class => "clearfix record #{cycle('on', 'on-hover')}", :id => dom_id(account) }
   %span.title
-    = account.email
+    = link_to account.email, [:admin, account]
     = account.name if account.name
     (#{l account.created_at.to_date})
     %span.preview &nbsp;
