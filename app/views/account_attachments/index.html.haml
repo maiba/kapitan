@@ -10,12 +10,19 @@
               = link_to "Скачать", attachment
               = link_to "Удалить", attachment, :confirm => "Вы точно хотите удалить этот файл?", :method => :delete
               = attachment.resource_file_name
+              -if attachment.resource_file_description
+                %br
+                Описание:
+                = attachment.resource_file_description
     %fieldset
       %legend Форма загрузки
       = form_for Account::Attachment.new, :html => { :multipart => true } do |f|
         .field
           = f.label :resourse
           = f.file_field :resource
+        .field
+          = f.label :resource_file_description
+          = f.text_field :resource_file_description
         .field
           = f.submit "Загрузить"
   - else

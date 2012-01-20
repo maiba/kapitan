@@ -30,6 +30,7 @@ ru:
 
         attachment:
           resourse: Файл
+          resource_file_description: Описание файла
           
       news_item:
         title: Заголовок
