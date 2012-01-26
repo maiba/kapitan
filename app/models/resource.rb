@@ -1,8 +1,6 @@
 class Resource < ActiveRecord::Base
-  require 'pry'
   attr_accessor :use_sandbox
   attr_accessible :id, :file, :use_sandbox
-  #before_save(:raise_use_sandbox)
   # What is the max resource size a user can upload
   MAX_SIZE_IN_MB = 50
 
